@@ -1,0 +1,14 @@
+{
+  "name": "AetherScraper",
+  "id": "plugin.program.aetherscraper",
+  "module_id": "script.module.aetherscraper",
+  "type": "external_scraper",
+  "version": 1,
+  "entrypoint": "aetherscraper.sources",
+  "folders": ["torrents", "torrent", "hosters", "direct"],
+  "actions": {
+    "play": "plugin://plugin.program.aetherscraper/?action=MediaPlay",
+    "settings": "plugin://plugin.program.aetherscraper/?action=settings"
+  },
+  "safe_use": "AetherScraper exposes configured providers only. It does not bypass anti-bot, CAPTCHA, paywall, or access-control systems."
+}

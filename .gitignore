@@ -1,0 +1,33 @@
+# Local agent/tooling artifacts
+.agents/
+.pi-lens/
+
+# Python/cache artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.pyright/
+
+# Build/package outputs
+dist/
+build/
+*.egg-info/
+*.zip
+
+# Kodi/runtime scratch
+*.log
+*.sqlite3
+*.db
+
+# Third-party/reference-only add-ons; keep out of first-party source repo unless promoted.
+plugin.video.fenlight/
+plugin.video.umbrella/
+script.module.magneto/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

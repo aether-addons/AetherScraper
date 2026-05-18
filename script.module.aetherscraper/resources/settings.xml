@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settings version="1">
+  <section id="script.module.aetherscraper">
+    <category id="general" label="30000" help="30001">
+      <group id="1" label="30002">
+        <setting id="debug_logging" type="boolean" label="30003" help="30004">
+          <level>1</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="scrape_timeout" type="integer" label="30005" help="30006">
+          <level>0</level>
+          <default>30</default>
+          <constraints>
+            <minimum>5</minimum>
+            <maximum>120</maximum>
+          </constraints>
+          <control type="edit" format="integer">
+            <heading>30005</heading>
+          </control>
+        </setting>
+        <setting id="max_results" type="integer" label="30007" help="30008">
+          <level>0</level>
+          <default>100</default>
+          <constraints>
+            <minimum>1</minimum>
+            <maximum>500</maximum>
+          </constraints>
+          <control type="edit" format="integer">
+            <heading>30007</heading>
+          </control>
+        </setting>
+        <setting id="provider_timeout" type="integer" label="30009" help="30010">
+          <level>1</level>
+          <default>10</default>
+          <constraints>
+            <minimum>3</minimum>
+            <maximum>60</maximum>
+          </constraints>
+          <control type="edit" format="integer">
+            <heading>30009</heading>
+          </control>
+        </setting>
+        <setting id="provider_retries" type="integer" label="30011" help="30012">
+          <level>1</level>
+          <default>1</default>
+          <constraints>
+            <minimum>0</minimum>
+            <maximum>5</maximum>
+          </constraints>
+          <control type="edit" format="integer">
+            <heading>30011</heading>
+          </control>
+        </setting>
+        <setting id="concurrent_scraping" type="boolean" label="30013" help="30014">
+          <level>1</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+      </group>
+    </category>
+    <category id="filters" label="30030" help="30031">
+      <group id="1" label="30032">
+        <setting id="filter_hevc" type="boolean" label="30033" help="30034">
+          <level>1</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="filter_av1" type="boolean" label="30035" help="30036">
+          <level>1</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="filter_dolby_vision" type="boolean" label="30037" help="30038">
+          <level>1</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="filter_hdr" type="boolean" label="30039" help="30040">
+          <level>1</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="filter_foreign_audio" type="boolean" label="30041" help="30042">
+          <level>1</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="use_default_undesirables" type="boolean" label="30043" help="30044">
+          <level>1</level>
+          <default>true</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="undesirable_keywords" type="string" label="30045" help="30046">
+          <level>1</level>
+          <default />
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string">
+            <heading>30045</heading>
+          </control>
+        </setting>
+      </group>
+    </category>
+    <category id="support" label="30080" help="30081">
+      <group id="1" label="30082">
+        <setting id="support_file_logging" type="boolean" label="30083" help="30084">
+          <level>1</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="support_log_level" type="string" label="30085" help="30086">
+          <level>1</level>
+          <default>info</default>
+          <constraints>
+            <options>
+              <option label="30087">debug</option>
+              <option label="30088">info</option>
+              <option label="30089">warning</option>
+              <option label="30090">error</option>
+            </options>
+          </constraints>
+          <control type="list" format="string">
+            <heading>30085</heading>
+          </control>
+        </setting>
+        <setting id="support_redact_secrets" type="boolean" label="30091" help="30092">
+          <level>1</level>
+          <default>true</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="support_max_log_bytes" type="integer" label="30093" help="30094">
+          <level>2</level>
+          <default>262144</default>
+          <constraints>
+            <minimum>4096</minimum>
+            <maximum>1048576</maximum>
+          </constraints>
+          <control type="edit" format="integer">
+            <heading>30093</heading>
+          </control>
+        </setting>
+      </group>
+    </category>
+    <category id="ui" label="30100" help="30101">
+      <group id="1" label="30102">
+        <setting id="ui_color_tags" type="boolean" label="30103" help="30104">
+          <level>0</level>
+          <default>true</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="ui_autoplay_policy" type="string" label="30105" help="30106">
+          <level>1</level>
+          <default>score_quality_size</default>
+          <constraints>
+            <options>
+              <option label="30107">score_quality_size</option>
+              <option label="30108">quality_score_size</option>
+              <option label="30109">size_quality_score</option>
+            </options>
+          </constraints>
+          <control type="list" format="string">
+            <heading>30105</heading>
+          </control>
+        </setting>
+        <setting id="ui_color_4k" type="string" label="30110" help="30111">
+          <level>1</level>
+          <default>gold</default>
+          <control type="edit" format="string"><heading>30110</heading></control>
+        </setting>
+        <setting id="ui_color_1080p" type="string" label="30112" help="30113">
+          <level>1</level>
+          <default>deepskyblue</default>
+          <control type="edit" format="string"><heading>30112</heading></control>
+        </setting>
+        <setting id="ui_color_720p" type="string" label="30114" help="30115">
+          <level>1</level>
+          <default>limegreen</default>
+          <control type="edit" format="string"><heading>30114</heading></control>
+        </setting>
+        <setting id="ui_color_cam" type="string" label="30116" help="30117">
+          <level>1</level>
+          <default>red</default>
+          <control type="edit" format="string"><heading>30116</heading></control>
+        </setting>
+        <setting id="ui_color_scr" type="string" label="30118" help="30119">
+          <level>1</level>
+          <default>orange</default>
+          <control type="edit" format="string"><heading>30118</heading></control>
+        </setting>
+        <setting id="ui_color_direct" type="string" label="30120" help="30121">
+          <level>1</level>
+          <default>white</default>
+          <control type="edit" format="string"><heading>30120</heading></control>
+        </setting>
+      </group>
+    </category>
+    <category id="providers" label="30020" help="30021">
+      <group id="1" label="30020">
+        <setting id="provider.torrent_json.enabled" type="boolean" label="30022" help="30023">
+          <level>0</level>
+          <default>true</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="provider.example.enabled" type="boolean" label="30024" help="30025">
+          <level>2</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="provider.torznab.enabled" type="boolean" label="30050" help="30051">
+          <level>1</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="provider.torznab.base_url" type="string" label="30052" help="30053">
+          <level>1</level>
+          <default />
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string">
+            <heading>30052</heading>
+          </control>
+        </setting>
+        <setting id="provider.torznab.api_key" type="string" label="30054" help="30055">
+          <level>1</level>
+          <default />
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string">
+            <heading>30054</heading>
+          </control>
+        </setting>
+        <setting id="provider.prowlarr.enabled" type="boolean" label="30056" help="30057">
+          <level>1</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="provider.prowlarr.base_url" type="string" label="30058" help="30059">
+          <level>1</level>
+          <default />
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string">
+            <heading>30058</heading>
+          </control>
+        </setting>
+        <setting id="provider.prowlarr.api_key" type="string" label="30060" help="30061">
+          <level>1</level>
+          <default />
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string">
+            <heading>30060</heading>
+            <hidden>true</hidden>
+          </control>
+        </setting>
+        <setting id="provider.prowlarr.indexer_id" type="string" label="30134" help="30135">
+          <level>1</level>
+          <default />
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string">
+            <heading>30134</heading>
+          </control>
+        </setting>
+        <setting id="provider.prowlarr.categories" type="string" label="30136" help="30137">
+          <level>1</level>
+          <default />
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string">
+            <heading>30136</heading>
+          </control>
+        </setting>
+        <setting id="provider.torbox_torznab.enabled" type="boolean" label="30062" help="30063">
+          <level>1</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="provider.torbox_torznab.base_url" type="string" label="30064" help="30065">
+          <level>1</level>
+          <default />
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string">
+            <heading>30064</heading>
+          </control>
+        </setting>
+        <setting id="provider.torbox_torznab.api_key" type="string" label="30066" help="30067">
+          <level>1</level>
+          <default />
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string">
+            <heading>30066</heading>
+          </control>
+        </setting>
+        <setting id="provider.aiostreams.enabled" type="boolean" label="30068" help="30069">
+          <level>1</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="provider.aiostreams.instance_url" type="string" label="30070" help="30071">
+          <level>1</level>
+          <default />
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string">
+            <heading>30070</heading>
+          </control>
+        </setting>
+        <setting id="provider.aiostreams.auth_token" type="string" label="30072" help="30073">
+          <level>1</level>
+          <default />
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string">
+            <heading>30072</heading>
+          </control>
+        </setting>
+        <setting id="provider.aiostreams.auth_header" type="string" label="30074" help="30075">
+          <level>1</level>
+          <default>Authorization</default>
+          <control type="edit" format="string">
+            <heading>30074</heading>
+          </control>
+        </setting>
+        <setting id="provider.ytsmx.enabled" type="boolean" label="30130" help="30131">
+          <level>1</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="provider.ytsmx.base_url" type="string" label="30132" help="30133">
+          <level>1</level>
+          <default>https://yts.mx/api/v2/list_movies.json</default>
+          <control type="edit" format="string">
+            <heading>30132</heading>
+          </control>
+        </setting>
+        <setting id="provider.torrentio.enabled" type="boolean" label="30138" help="30139">
+          <level>1</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="provider.torrentio.base_url" type="string" label="30140" help="30141">
+          <level>1</level>
+          <default>https://torrentio.strem.fun</default>
+          <control type="edit" format="string">
+            <heading>30140</heading>
+          </control>
+        </setting>
+        <setting id="provider.torrentio.config_path" type="string" label="30142" help="30143">
+          <level>1</level>
+          <default />
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string">
+            <heading>30142</heading>
+          </control>
+        </setting>
+      </group>
+    </category>
+  </section>
+</settings>

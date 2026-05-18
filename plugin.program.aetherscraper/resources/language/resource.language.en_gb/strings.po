@@ -1,0 +1,63 @@
+# Kodi Media Center language file
+# Addon Name: AetherScraper Tools
+# Addon id: plugin.program.aetherscraper
+# Addon Provider: AetherScraper
+msgid ""
+msgstr ""
+"Project-Id-Version: AetherScraper Tools\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgctxt "#30000"
+msgid "AetherScraper Tools"
+msgstr "AetherScraper Tools"
+
+msgctxt "#30100"
+msgid "Settings"
+msgstr "Settings"
+
+msgctxt "#30101"
+msgid "Providers"
+msgstr "Providers"
+
+msgctxt "#30102"
+msgid "External setup help"
+msgstr "External setup help"
+
+msgctxt "#30103"
+msgid "Health check"
+msgstr "Health check"
+
+msgctxt "#30104"
+msgid "Module help"
+msgstr "Module help"
+
+msgctxt "#30105"
+msgid "Enable all providers"
+msgstr "Enable all providers"
+
+msgctxt "#30106"
+msgid "Disable all providers"
+msgstr "Disable all providers"
+
+msgctxt "#30107"
+msgid "Enable torrent providers"
+msgstr "Enable torrent providers"
+
+msgctxt "#30108"
+msgid "Enable pack-capable providers"
+msgstr "Enable pack-capable providers"
+
+msgctxt "#30109"
+msgid "Restore provider defaults"
+msgstr "Restore provider defaults"
+
+msgctxt "#30200"
+msgid "Provider action cancelled"
+msgstr "Provider action cancelled"
+
+msgctxt "#30201"
+msgid "Run provider action: {action}?"
+msgstr "Run provider action: {action}?"

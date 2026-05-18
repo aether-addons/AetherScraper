@@ -1,0 +1,5 @@
+{
+  "extraPaths": ["script.module.aetherscraper/lib"],
+  "include": ["script.module.aetherscraper/lib", "tests"],
+  "reportMissingImports": "warning"
+}

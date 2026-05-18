@@ -1,0 +1,22 @@
+{
+  "id": "torrent_json",
+  "name": "Torrent JSON Provider",
+  "enabled": true,
+  "priority": 100,
+  "timeout": 10,
+  "retries": 1,
+  "provider_type": "torrent",
+  "pack_capable": true,
+  "has_movies": true,
+  "has_episodes": true,
+  "media_types": ["movie", "episode", "season", "show"],
+  "base_url": "",
+  "headers": {},
+  "params": {
+    "data_file": "special://profile/addon_data/script.module.aetherscraper/torrents.json"
+  },
+  "limits": {
+    "max_results": 100,
+    "min_seeders": 0
+  }
+}

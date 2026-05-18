@@ -1,0 +1,19 @@
+{
+  "id": "example",
+  "name": "Example Public Provider",
+  "enabled": false,
+  "priority": 999,
+  "timeout": 10,
+  "retries": 1,
+  "provider_type": "direct",
+  "pack_capable": false,
+  "has_movies": true,
+  "has_episodes": false,
+  "media_types": ["movie"],
+  "base_url": "https://example.com",
+  "headers": {},
+  "params": {},
+  "limits": {
+    "max_results": 10
+  }
+}

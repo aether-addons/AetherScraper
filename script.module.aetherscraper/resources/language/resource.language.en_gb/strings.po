@@ -1,0 +1,468 @@
+# Kodi strings for AetherScraper
+msgid ""
+msgstr ""
+"Project-Id-Version: AetherScraper\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgctxt "#30000"
+msgid "AetherScraper"
+msgstr "AetherScraper"
+
+msgctxt "#30001"
+msgid "General settings for scraper behavior and safe runtime storage."
+msgstr "General settings for scraper behavior and safe runtime storage."
+
+msgctxt "#30002"
+msgid "General"
+msgstr "General"
+
+msgctxt "#30003"
+msgid "Enable debug logging"
+msgstr "Enable debug logging"
+
+msgctxt "#30004"
+msgid "Write additional diagnostic messages. Secrets are never logged intentionally."
+msgstr "Write additional diagnostic messages. Secrets are never logged intentionally."
+
+msgctxt "#30005"
+msgid "Scrape timeout"
+msgstr "Scrape timeout"
+
+msgctxt "#30006"
+msgid "Maximum seconds allowed for a full scrape before providers should stop."
+msgstr "Maximum seconds allowed for a full scrape before providers should stop."
+
+msgctxt "#30007"
+msgid "Maximum results"
+msgstr "Maximum results"
+
+msgctxt "#30008"
+msgid "Maximum number of sources returned after filtering and sorting."
+msgstr "Maximum number of sources returned after filtering and sorting."
+
+msgctxt "#30009"
+msgid "Provider timeout"
+msgstr "Provider timeout"
+
+msgctxt "#30010"
+msgid "Default seconds allowed for one provider request."
+msgstr "Default seconds allowed for one provider request."
+
+msgctxt "#30011"
+msgid "Provider retries"
+msgstr "Provider retries"
+
+msgctxt "#30012"
+msgid "Default retry attempts for provider network requests."
+msgstr "Default retry attempts for provider network requests."
+
+msgctxt "#30013"
+msgid "Run providers concurrently"
+msgstr "Run providers concurrently"
+
+msgctxt "#30014"
+msgid "Search providers in parallel while honoring scrape and provider timeout budgets."
+msgstr "Search providers in parallel while honoring scrape and provider timeout budgets."
+
+msgctxt "#30020"
+msgid "Providers"
+msgstr "Providers"
+
+msgctxt "#30021"
+msgid "Enable or disable provider integrations."
+msgstr "Enable or disable provider integrations."
+
+msgctxt "#30022"
+msgid "Torrent JSON provider"
+msgstr "Torrent JSON provider"
+
+msgctxt "#30023"
+msgid "Search a user-managed JSON list of legal torrent entries."
+msgstr "Search a user-managed JSON list of legal torrent entries."
+
+msgctxt "#30024"
+msgid "Example provider"
+msgstr "Example provider"
+
+msgctxt "#30025"
+msgid "Demo provider for development and testing only."
+msgstr "Demo provider for development and testing only."
+
+msgctxt "#30030"
+msgid "Filters"
+msgstr "Filters"
+
+msgctxt "#30031"
+msgid "Filter release metadata such as codec, HDR, language, and undesirable keywords."
+msgstr "Filter release metadata such as codec, HDR, language, and undesirable keywords."
+
+msgctxt "#30032"
+msgid "Release filters"
+msgstr "Release filters"
+
+msgctxt "#30033"
+msgid "Filter HEVC/H.265"
+msgstr "Filter HEVC/H.265"
+
+msgctxt "#30034"
+msgid "Exclude releases tagged as HEVC, H.265, or x265."
+msgstr "Exclude releases tagged as HEVC, H.265, or x265."
+
+msgctxt "#30035"
+msgid "Filter AV1"
+msgstr "Filter AV1"
+
+msgctxt "#30036"
+msgid "Exclude releases tagged as AV1."
+msgstr "Exclude releases tagged as AV1."
+
+msgctxt "#30037"
+msgid "Filter Dolby Vision"
+msgstr "Filter Dolby Vision"
+
+msgctxt "#30038"
+msgid "Exclude releases tagged as Dolby Vision, DV, or DoVi."
+msgstr "Exclude releases tagged as Dolby Vision, DV, or DoVi."
+
+msgctxt "#30039"
+msgid "Filter HDR"
+msgstr "Filter HDR"
+
+msgctxt "#30040"
+msgid "Exclude releases tagged as HDR, HDR10, HDR10+, or HLG."
+msgstr "Exclude releases tagged as HDR, HDR10, HDR10+, or HLG."
+
+msgctxt "#30041"
+msgid "Filter foreign audio"
+msgstr "Filter foreign audio"
+
+msgctxt "#30042"
+msgid "Exclude releases detected as non-English audio unless tagged multi-language."
+msgstr "Exclude releases detected as non-English audio unless tagged multi-language."
+
+msgctxt "#30043"
+msgid "Use default undesirable keywords"
+msgstr "Use default undesirable keywords"
+
+msgctxt "#30044"
+msgid "Exclude releases matching the built-in undesirable keyword list."
+msgstr "Exclude releases matching the built-in undesirable keyword list."
+
+msgctxt "#30045"
+msgid "Custom undesirable keywords"
+msgstr "Custom undesirable keywords"
+
+msgctxt "#30046"
+msgid "Comma-separated keywords to exclude from release titles."
+msgstr "Comma-separated keywords to exclude from release titles."
+
+msgctxt "#30050"
+msgid "Generic Torznab provider"
+msgstr "Generic Torznab provider"
+
+msgctxt "#30051"
+msgid "Search an authorized Torznab-compatible RSS/indexer endpoint."
+msgstr "Search an authorized Torznab-compatible RSS/indexer endpoint."
+
+msgctxt "#30052"
+msgid "Torznab URL"
+msgstr "Torznab URL"
+
+msgctxt "#30053"
+msgid "Torznab API endpoint URL, for example a user-owned indexer feed."
+msgstr "Torznab API endpoint URL, for example a user-owned indexer feed."
+
+msgctxt "#30054"
+msgid "Torznab API key"
+msgstr "Torznab API key"
+
+msgctxt "#30055"
+msgid "API key for the Torznab endpoint. This value is not logged intentionally."
+msgstr "API key for the Torznab endpoint. This value is not logged intentionally."
+
+msgctxt "#30056"
+msgid "Prowlarr provider"
+msgstr "Prowlarr provider"
+
+msgctxt "#30057"
+msgid "Search a user-owned Prowlarr Torznab endpoint."
+msgstr "Search a user-owned Prowlarr Torznab endpoint."
+
+msgctxt "#30058"
+msgid "Prowlarr Torznab URL"
+msgstr "Prowlarr Torznab URL"
+
+msgctxt "#30059"
+msgid "Prowlarr Torznab endpoint URL."
+msgstr "Prowlarr Torznab endpoint URL."
+
+msgctxt "#30060"
+msgid "Prowlarr API key"
+msgstr "Prowlarr API key"
+
+msgctxt "#30061"
+msgid "API key for Prowlarr. This value is not logged intentionally."
+msgstr "API key for Prowlarr. This value is not logged intentionally."
+
+msgctxt "#30062"
+msgid "TorBox Torznab provider"
+msgstr "TorBox Torznab provider"
+
+msgctxt "#30063"
+msgid "Search an authorized TorBox Torznab endpoint."
+msgstr "Search an authorized TorBox Torznab endpoint."
+
+msgctxt "#30064"
+msgid "TorBox Torznab URL"
+msgstr "TorBox Torznab URL"
+
+msgctxt "#30065"
+msgid "TorBox Torznab endpoint URL."
+msgstr "TorBox Torznab endpoint URL."
+
+msgctxt "#30066"
+msgid "TorBox API key"
+msgstr "TorBox API key"
+
+msgctxt "#30067"
+msgid "API key for TorBox. This value is not logged intentionally."
+msgstr "API key for TorBox. This value is not logged intentionally."
+
+msgctxt "#30068"
+msgid "AIOStreams provider"
+msgstr "AIOStreams provider"
+
+msgctxt "#30069"
+msgid "Search an authorized AIOStreams-compatible JSON instance."
+msgstr "Search an authorized AIOStreams-compatible JSON instance."
+
+msgctxt "#30070"
+msgid "AIOStreams instance URL"
+msgstr "AIOStreams instance URL"
+
+msgctxt "#30071"
+msgid "Base URL of the AIOStreams-compatible instance."
+msgstr "Base URL of the AIOStreams-compatible instance."
+
+msgctxt "#30072"
+msgid "AIOStreams auth token"
+msgstr "AIOStreams auth token"
+
+msgctxt "#30073"
+msgid "Auth token/header value for the AIOStreams instance. This value is not logged intentionally."
+msgstr "Auth token/header value for the AIOStreams instance. This value is not logged intentionally."
+
+msgctxt "#30074"
+msgid "AIOStreams auth header"
+msgstr "AIOStreams auth header"
+
+msgctxt "#30075"
+msgid "Header name used for AIOStreams authentication."
+msgstr "Header name used for AIOStreams authentication."
+
+msgctxt "#30130"
+msgid "YTS.mx provider"
+msgstr "YTS.mx provider"
+
+msgctxt "#30131"
+msgid "Search the YTS.mx public movie API. Movie torrents only; disabled by default."
+msgstr "Search the YTS.mx public movie API. Movie torrents only; disabled by default."
+
+msgctxt "#30132"
+msgid "YTS.mx API URL"
+msgstr "YTS.mx API URL"
+
+msgctxt "#30133"
+msgid "YTS.mx list_movies JSON endpoint. No API key is required."
+msgstr "YTS.mx list_movies JSON endpoint. No API key is required."
+
+msgctxt "#30134"
+msgid "Prowlarr indexer ID"
+msgstr "Prowlarr indexer ID"
+
+msgctxt "#30135"
+msgid "Optional Prowlarr indexer ID. When set with a root URL, AetherScraper builds the Torznab endpoint path."
+msgstr "Optional Prowlarr indexer ID. When set with a root URL, AetherScraper builds the Torznab endpoint path."
+
+msgctxt "#30136"
+msgid "Prowlarr categories"
+msgstr "Prowlarr categories"
+
+msgctxt "#30137"
+msgid "Optional comma-separated Torznab category IDs, for example 2000,5000,5030."
+msgstr "Optional comma-separated Torznab category IDs, for example 2000,5000,5030."
+
+msgctxt "#30138"
+msgid "Torrentio provider"
+msgstr "Torrentio provider"
+
+msgctxt "#30139"
+msgid "Search Torrentio public Stremio stream JSON. Requires IMDb IDs; disabled by default."
+msgstr "Search Torrentio public Stremio stream JSON. Requires IMDb IDs; disabled by default."
+
+msgctxt "#30140"
+msgid "Torrentio base URL"
+msgstr "Torrentio base URL"
+
+msgctxt "#30141"
+msgid "Torrentio-compatible Stremio add-on root URL. No API key is required."
+msgstr "Torrentio-compatible Stremio add-on root URL. No API key is required."
+
+msgctxt "#30142"
+msgid "Torrentio config path"
+msgstr "Torrentio config path"
+
+msgctxt "#30143"
+msgid "Optional Torrentio config path segment, for example sort=qualitysize."
+msgstr "Optional Torrentio config path segment, for example sort=qualitysize."
+
+msgctxt "#30080"
+msgid "Support"
+msgstr "Support"
+
+msgctxt "#30081"
+msgid "Health checks, diagnostics, and safe support logging."
+msgstr "Health checks, diagnostics, and safe support logging."
+
+msgctxt "#30082"
+msgid "Diagnostics"
+msgstr "Diagnostics"
+
+msgctxt "#30083"
+msgid "Enable profile log file"
+msgstr "Enable profile log file"
+
+msgctxt "#30084"
+msgid "Write redacted support logs under the add-on profile folder."
+msgstr "Write redacted support logs under the add-on profile folder."
+
+msgctxt "#30085"
+msgid "Support log level"
+msgstr "Support log level"
+
+msgctxt "#30086"
+msgid "Minimum diagnostic level for support tooling."
+msgstr "Minimum diagnostic level for support tooling."
+
+msgctxt "#30087"
+msgid "Debug"
+msgstr "Debug"
+
+msgctxt "#30088"
+msgid "Info"
+msgstr "Info"
+
+msgctxt "#30089"
+msgid "Warning"
+msgstr "Warning"
+
+msgctxt "#30090"
+msgid "Error"
+msgstr "Error"
+
+msgctxt "#30091"
+msgid "Redact secrets in logs"
+msgstr "Redact secrets in logs"
+
+msgctxt "#30092"
+msgid "Mask tokens, API keys, cookies, and authorization headers before writing support logs."
+msgstr "Mask tokens, API keys, cookies, and authorization headers before writing support logs."
+
+msgctxt "#30093"
+msgid "Maximum support log size"
+msgstr "Maximum support log size"
+
+msgctxt "#30094"
+msgid "Rotate support log when it exceeds this many bytes."
+msgstr "Rotate support log when it exceeds this many bytes."
+
+msgctxt "#30100"
+msgid "UI and playback"
+msgstr "UI and playback"
+
+msgctxt "#30101"
+msgid "Source display, highlight colors, autoplay ranking, and playback helper behavior."
+msgstr "Source display, highlight colors, autoplay ranking, and playback helper behavior."
+
+msgctxt "#30102"
+msgid "Source list display"
+msgstr "Source list display"
+
+msgctxt "#30103"
+msgid "Color source labels"
+msgstr "Color source labels"
+
+msgctxt "#30104"
+msgid "Use Kodi color tags in source labels. Disable if your skin handles colors differently."
+msgstr "Use Kodi color tags in source labels. Disable if your skin handles colors differently."
+
+msgctxt "#30105"
+msgid "Autoplay ranking"
+msgstr "Autoplay ranking"
+
+msgctxt "#30106"
+msgid "Order used when automatically choosing the best source."
+msgstr "Order used when automatically choosing the best source."
+
+msgctxt "#30107"
+msgid "Score, quality, size"
+msgstr "Score, quality, size"
+
+msgctxt "#30108"
+msgid "Quality, score, size"
+msgstr "Quality, score, size"
+
+msgctxt "#30109"
+msgid "Size, quality, score"
+msgstr "Size, quality, score"
+
+msgctxt "#30110"
+msgid "4K highlight color"
+msgstr "4K highlight color"
+
+msgctxt "#30111"
+msgid "Kodi color name used for 4K sources."
+msgstr "Kodi color name used for 4K sources."
+
+msgctxt "#30112"
+msgid "1080p highlight color"
+msgstr "1080p highlight color"
+
+msgctxt "#30113"
+msgid "Kodi color name used for 1080p sources."
+msgstr "Kodi color name used for 1080p sources."
+
+msgctxt "#30114"
+msgid "720p highlight color"
+msgstr "720p highlight color"
+
+msgctxt "#30115"
+msgid "Kodi color name used for 720p sources."
+msgstr "Kodi color name used for 720p sources."
+
+msgctxt "#30116"
+msgid "CAM highlight color"
+msgstr "CAM highlight color"
+
+msgctxt "#30117"
+msgid "Kodi color name used for CAM sources."
+msgstr "Kodi color name used for CAM sources."
+
+msgctxt "#30118"
+msgid "SCR highlight color"
+msgstr "SCR highlight color"
+
+msgctxt "#30119"
+msgid "Kodi color name used for screener sources."
+msgstr "Kodi color name used for screener sources."
+
+msgctxt "#30120"
+msgid "Direct-source highlight color"
+msgstr "Direct-source highlight color"
+
+msgctxt "#30121"
+msgid "Kodi color name used for direct sources when no quality color applies."
+msgstr "Kodi color name used for direct sources when no quality color applies."

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="script.module.aetherscraper" version="0.1.0" name="AetherScraper" provider-name="AetherScraper">
+  <requires>
+    <import addon="xbmc.python" version="3.0.1" />
+  </requires>
+  <extension point="xbmc.python.module" library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Configurable media provider framework for Kodi add-ons.</summary>
+    <description lang="en_GB">Reusable Python module for legal, user-configured media provider integrations in Kodi add-ons. Provides provider registry, filtering, normalization, retry hooks, lifecycle helpers, and support utilities.</description>
+    <disclaimer lang="en_GB">Use only with sources you own, have permission to access, or that are publicly licensed. This module does not bypass DRM, paywalls, or access controls.</disclaimer>
+    <platform>all</platform>
+    <license>MIT</license>
+    <source>https://example.invalid/aetherscraper</source>
+    <news>Added safe module-only scraper framework with lifecycle helpers, support utilities, provider discovery, filtering, and external-provider adapters.</news>
+    <assets>
+      <icon>resources/icon.png</icon>
+      <fanart>resources/fanart.png</fanart>
+    </assets>
+  </extension>
+</addon>
