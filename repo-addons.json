@@ -1,0 +1,6 @@
+{
+  "addons": [
+    "script.module.aetherscraper",
+    "plugin.program.aetherscraper"
+  ]
+}

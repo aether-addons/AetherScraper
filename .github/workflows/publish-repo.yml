@@ -1,0 +1,72 @@
+name: Publish AetherRepo
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-aetherrepo
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate AetherRepo app token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.AETHER_APP_ID }}
+          private-key: ${{ secrets.AETHER_APP_PRIVATE_KEY }}
+          owner: aether-addons
+          repositories: AetherRepo
+
+      - name: Checkout AetherScraper
+        uses: actions/checkout@v4
+        with:
+          path: AetherScraper
+
+      - name: Checkout AetherRepo
+        uses: actions/checkout@v4
+        with:
+          repository: aether-addons/AetherRepo
+          path: AetherRepo
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate source add-ons
+        working-directory: AetherScraper
+        run: python3 scripts/validate_addons.py .
+
+      - name: Run tests
+        working-directory: AetherScraper
+        env:
+          PYTHONPATH: script.module.aetherscraper/lib:plugin.program.aetherscraper/resources/lib
+        run: python3 -m pytest -q
+
+      - name: Build repository feed
+        run: python3 AetherRepo/build_repo.py --source AetherScraper --github-branch main
+
+      - name: Validate repository feed
+        run: python3 AetherRepo/scripts/validate_repo.py AetherRepo
+
+      - name: Commit repository update
+        working-directory: AetherRepo
+        run: |
+          if git diff --quiet --exit-code && [ -z "$(git status --short)" ]; then
+            echo "No repository changes."
+            exit 0
+          fi
+          git config user.name "aetherrepo-publisher[bot]"
+          git config user.email "aetherrepo-publisher[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Update repository feed from AetherScraper"
+          git push

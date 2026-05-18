@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.program.aetherscraper" version="0.1.2" name="AetherScraper" provider-name="AetherScraper">
+<addon id="plugin.program.aetherscraper" version="0.1.3" name="AetherScraper" provider-name="AetherScraper">
   <requires>
     <import addon="xbmc.python" version="3.0.1" />
-    <import addon="script.module.aetherscraper" version="0.1.1" />
+    <import addon="script.module.aetherscraper" version="0.1.2" />
   </requires>
   <extension point="xbmc.python.pluginsource" library="default.py">
     <provides>executable</provides>
@@ -14,7 +14,7 @@
     <platform>all</platform>
     <license>MIT</license>
     <source>https://example.invalid/aetherscraper</source>
-    <news>Renamed visible Program add-on from AetherScraper Tools to AetherScraper.</news>
+    <news>Updated AetherScraper icon with a transparent background and scraper-focused branding.</news>
     <assets>
       <icon>resources/icon.png</icon>
       <fanart>resources/fanart.png</fanart>
