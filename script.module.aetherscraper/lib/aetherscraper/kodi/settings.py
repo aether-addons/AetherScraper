@@ -50,9 +50,6 @@ _DEFAULTS: dict[str, str] = {
     "provider.tbtorznab.enabled": "false",
     "provider.tbtorznab.base_url": "https://search-api.torbox.app/torznab/api",
     "provider.tbtorznab.api_key": "",
-    "provider.torbox_torznab.enabled": "false",
-    "provider.torbox_torznab.base_url": "",
-    "provider.torbox_torznab.api_key": "",
     "provider.aiostreams.enabled": "false",
     "provider.aiostreams.instance_url": "",
     "provider.aiostreams.auth_token": "",
@@ -73,8 +70,13 @@ _SETTING_ALIASES: dict[str, tuple[str, ...]] = {
     "ui_color_1080p": ("scraper_1080p_highlight",),
     "ui_color_720p": ("scraper_720p_highlight",),
     "ui_color_sd": ("scraper_SD_highlight",),
-    "provider.tbtorznab.api_key": ("torbox.token",),
-    "provider.tbtorznab.enabled": ("provider.tbtorznab",),
+    "provider.tbtorznab.api_key": ("torbox.token", "provider.torbox_torznab.api_key"),
+    "provider.tbtorznab.base_url": ("provider.torbox_torznab.base_url",),
+    "provider.tbtorznab.enabled": (
+        "provider.tbtorznab",
+        "provider.torbox_torznab.enabled",
+        "provider.torbox_torznab",
+    ),
 }
 _LANGUAGE_CODES = {
     "english": "en",
@@ -131,11 +133,27 @@ class KodiSettings:
         return self._addon is not None
 
     def get_string(self, key: str, default: str = "") -> str:
-        for candidate in self._setting_candidates(key):
+        candidates = self._setting_candidates(key)
+        kodi_values: list[tuple[str, str]] = []
+        for candidate in candidates:
             value = self._get_from_kodi(candidate)
             if value is not None and value != "":
-                return value
-        for candidate in self._setting_candidates(key):
+                kodi_values.append((candidate, value))
+        if kodi_values:
+            primary_value = kodi_values[0][1]
+            primary_default = _DEFAULTS.get(key, "")
+            if primary_value == primary_default:
+                for candidate, value in kodi_values[1:]:
+                    candidate_default = _DEFAULTS.get(candidate)
+                    if (
+                        candidate_default is None
+                        and self._typed_getter(candidate) == "getSettingBool"
+                    ):
+                        candidate_default = "false"
+                    if value != (candidate_default or ""):
+                        return value
+            return primary_value
+        for candidate in candidates:
             value = self._fallback.get(candidate)
             if value is not None and value != "":
                 return value

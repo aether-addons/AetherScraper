@@ -196,7 +196,7 @@ Validation notes:
 Validation notes:
 
 - Added Torznab parser/query helpers in `aetherscraper.torznab`.
-- Added authorized providers: `TorznabProvider`, `ProwlarrProvider`, `TorBoxTorznabProvider`, and `AIOStreamsProvider`.
+- Added authorized providers: `TorznabProvider`, `ProwlarrProvider`, and `AIOStreamsProvider`. Legacy TorBox Torznab provider id later removed in favor of Phase 14 `TbTorznabProvider`.
 - Added Kodi settings/localization for provider URLs and API/auth values; providers disabled by default.
 - Secret values are read from settings/config and are not added to results or logs intentionally.
 - Added Phase 8 unit tests in `tests/test_phase8_authorized_providers.py` and README docs.
@@ -445,7 +445,8 @@ Validation notes:
 - Added hidden TorBox API key setting, endpoint override for testing/compatible endpoints, localized help, README docs, and fixture HTTP tests in `tests/test_phase14_tbtorznab_provider.py`.
 - Safety review: uses TorBox Torznab API endpoint only; no scraping, browser challenge, CAPTCHA, Cloudflare, or access-control bypass added. Secrets are read from settings and not logged.
 - Fix follow-up: matched Magneto's TorBox request shape by requiring IMDb id/API key, sending full `tt...` IMDb id, omitting generic `q`/`year`, using `Magneto for Kodi` user-agent, and returning magnet URLs from Torznab `infohash` values instead of `.torrent` links.
-- Passed 2026-05-18: LSP diagnostics for `script.module.aetherscraper/lib/aetherscraper` and `tests`; `PYTHONPATH=script.module.aetherscraper/lib:plugin.program.aetherscraper/resources/lib python3 -m compileall -q script.module.aetherscraper/lib plugin.program.aetherscraper/resources/lib plugin.program.aetherscraper/default.py tests`; `PYTHONPATH=script.module.aetherscraper/lib:plugin.program.aetherscraper/resources/lib python3 -m unittest discover -s tests` (102 tests); `python3 -m ruff check script.module.aetherscraper/lib plugin.program.aetherscraper/resources/lib plugin.program.aetherscraper/default.py tests`; XML parse for module/companion addon and module settings; JSON parse for repo JSON files.
+- Fix follow-up: removed duplicate legacy `torbox_torznab` provider/settings entry, preserved `provider.torbox_torznab.*` as aliases for `provider.tbtorznab.*` even when Kodi returns canonical defaults, and moved TorBox labels to unique localization ids.
+- Passed 2026-05-18: LSP diagnostics for `script.module.aetherscraper/lib/aetherscraper` and `tests`; `PYTHONPATH=script.module.aetherscraper/lib:plugin.program.aetherscraper/resources/lib python3 -m compileall -q script.module.aetherscraper/lib plugin.program.aetherscraper/resources/lib plugin.program.aetherscraper/default.py tests`; `PYTHONPATH=script.module.aetherscraper/lib:plugin.program.aetherscraper/resources/lib python3 -m unittest discover -s tests` (104 tests); `python3 -m ruff check script.module.aetherscraper/lib plugin.program.aetherscraper/resources/lib plugin.program.aetherscraper/default.py tests`; XML parse for module/companion addon and module settings; JSON parse for repo JSON files.
 - Passed 2026-05-15: LSP diagnostics for `script.module.aetherscraper/lib/aetherscraper` and `tests`; `PYTHONPATH=script.module.aetherscraper/lib python3 -m compileall -q script.module.aetherscraper/lib tests script.module.aetherscraper/default.py script.module.aetherscraper/service.py`; `PYTHONPATH=script.module.aetherscraper/lib python3 -m unittest discover -s tests`; `python3 -m ruff check script.module.aetherscraper/lib tests script.module.aetherscraper/default.py script.module.aetherscraper/service.py`; XML parse check for `addon.xml` and `resources/settings.xml`.
 
 ## Phase 15 — Packaging, assets, docs, and release validation

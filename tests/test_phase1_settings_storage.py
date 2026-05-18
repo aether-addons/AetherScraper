@@ -63,6 +63,35 @@ class Phase1SettingsStorageTests(unittest.TestCase):
         self.assertEqual(settings.get_string("ui_highlight_type"), "single_color")
         self.assertEqual(settings.get_string("ui_color_single"), "magenta")
 
+    def test_kodi_alias_values_override_canonical_defaults(self) -> None:
+        class FakeAddon:
+            values = {
+                "scrape_timeout": "30",
+                "scraping_timeout": "44",
+                "provider.tbtorznab.enabled": False,
+                "provider.torbox_torznab.enabled": True,
+                "provider.tbtorznab.base_url": "https://search-api.torbox.app/torznab/api",
+                "provider.torbox_torznab.base_url": "http://127.0.0.1/legacy/api",
+            }
+
+            def getSetting(self, key):  # noqa: N802
+                return str(self.values.get(key, ""))
+
+            def getSettingBool(self, key):  # noqa: N802
+                return bool(self.values.get(key, False))
+
+            def getSettingInt(self, key):  # noqa: N802
+                return int(self.values.get(key, 0))
+
+        settings = KodiSettings(addon=FakeAddon())
+
+        self.assertEqual(settings.get_int("scrape_timeout"), 44)
+        self.assertTrue(settings.get_bool("provider.tbtorznab.enabled"))
+        self.assertEqual(
+            settings.get_string("provider.tbtorznab.base_url"),
+            "http://127.0.0.1/legacy/api",
+        )
+
     def test_profile_setup_and_version_update_are_non_destructive(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
             paths = first_run_setup(version="0.1.0", base_path=temp_dir)

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.6
+
+- Removed duplicate legacy TorBox Torznab provider/settings entry.
+- Kept legacy `provider.torbox_torznab.*` settings as aliases for `provider.tbtorznab.*`.
+- Moved TorBox/TB localization labels to unique string IDs.
+
 ## 0.1.3
 
 - Added Magneto-style settings aliases for external-provider compatibility.

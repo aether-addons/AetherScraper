@@ -54,6 +54,34 @@ How future agents should avoid it.
 
 ## Issues
 
+## 2026-05-18 — TorBox Torznab duplicate provider/settings entry
+
+Status: fixed
+Area: settings
+
+### Symptom
+
+Kodi settings/provider list showed duplicate TorBox Torznab entries after adding Magneto-compatible `tbtorznab`.
+
+### Cause
+
+A legacy internal `TorBoxTorznabProvider` with id `torbox_torznab` remained discoverable and had visible settings next to the new Magneto-compatible `TbTorznabProvider` id `tbtorznab`. TorBox settings also reused localization ids already used by UI highlight color settings.
+
+### Fix / Decision
+
+Remove discoverable legacy `TorBoxTorznabProvider` and remove `provider.torbox_torznab.*` from `resources/settings.xml`/defaults. Preserve legacy user config by reading `provider.torbox_torznab.*` as aliases for `provider.tbtorznab.*`, including Kodi cases where new canonical settings return default values. Move TorBox/TB strings to unique ids `30150`-`30155`.
+
+### Prevention
+
+When replacing provider ids for Magneto parity, do not keep old provider classes discoverable unless intentionally shown as separate providers. Add alias-only migration in `KodiSettings` instead.
+
+### References
+
+- `script.module.aetherscraper/lib/aetherscraper/providers/torznab.py`
+- `script.module.aetherscraper/lib/aetherscraper/kodi/settings.py`
+- `script.module.aetherscraper/resources/settings.xml`
+- `tests/test_phase14_tbtorznab_provider.py`
+
 ## 2026-05-18 — tbtorznab uses TorBox fixed endpoint and Magneto aliases
 
 Status: fixed

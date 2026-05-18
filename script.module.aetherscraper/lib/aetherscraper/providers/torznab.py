@@ -144,27 +144,6 @@ class TbTorznabProvider(TorznabProvider):
         return params
 
 
-class TorBoxTorznabProvider(TorznabProvider):
-    """Legacy internal TorBox Torznab provider id.
-
-    Prefer `TbTorznabProvider` for Magneto parity setting id `tbtorznab`.
-    """
-
-    config = ProviderConfig(
-        id="torbox_torznab",
-        name="TorBox Torznab (legacy)",
-        enabled=False,
-        priority=45,
-        timeout=10,
-        retries=1,
-        provider_type="torrent",
-        pack_capable=True,
-        has_movies=True,
-        has_episodes=True,
-        media_types=["movie", "episode", "season", "show"],
-    )
-
-
 def _int_list(value) -> list[int]:
     if isinstance(value, list):
         raw = value

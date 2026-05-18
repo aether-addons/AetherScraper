@@ -354,7 +354,7 @@ Built-in authorized adapters prefer user-configured APIs over public-site scrapi
 
 - `TorznabProvider` parses generic Torznab/Newznab RSS/XML.
 - `ProwlarrProvider` wraps a user-owned Prowlarr Torznab endpoint; either supply a full endpoint URL or a root URL plus indexer ID.
-- `TorBoxTorznabProvider` wraps an authorized TorBox Torznab endpoint.
+- `TbTorznabProvider` wraps an authorized TorBox Torznab endpoint (`provider.tbtorznab.*`; legacy `provider.torbox_torznab.*` settings still read as aliases).
 - `AIOStreamsProvider` parses AIOStreams-style JSON from a configured instance.
 
 Settings are disabled by default and include endpoint URLs plus API/auth values. Secrets are read from Kodi settings or explicit config only and are not logged intentionally.

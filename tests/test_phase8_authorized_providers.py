@@ -13,11 +13,7 @@ from aetherscraper.providers.aiostreams import (
     AIOStreamsProvider,
     normalize_aiostreams_results,
 )
-from aetherscraper.providers.torznab import (
-    ProwlarrProvider,
-    TorBoxTorznabProvider,
-    TorznabProvider,
-)
+from aetherscraper.providers.torznab import ProwlarrProvider, TorznabProvider
 from aetherscraper.torznab import build_torznab_params, parse_torznab
 
 INFO_HASH = "0123456789abcdef0123456789abcdef01234567"
@@ -140,11 +136,9 @@ class Phase8AuthorizedProvidersTests(unittest.TestCase):
         self.assertEqual(ProviderHandler.last_torznab_query["apikey"], ["secret-key"])
         self.assertNotIn("secret-key", repr(results[0]))
 
-    def test_prowlarr_and_torbox_are_torznab_wrappers(self):
+    def test_prowlarr_is_torznab_wrapper(self):
         self.assertEqual(ProwlarrProvider.config.id, "prowlarr")
-        self.assertEqual(TorBoxTorznabProvider.config.id, "torbox_torznab")
         self.assertTrue(ProwlarrProvider.config.pack_capable)
-        self.assertTrue(TorBoxTorznabProvider.config.pack_capable)
 
     def test_aiostreams_normalization_and_provider(self):
         normalized = normalize_aiostreams_results(
@@ -188,7 +182,7 @@ class Phase8AuthorizedProvidersTests(unittest.TestCase):
         self.assertFalse(errors)
         self.assertIn("torznab", ids)
         self.assertIn("prowlarr", ids)
-        self.assertIn("torbox_torznab", ids)
+        self.assertNotIn("torbox_torznab", ids)
         self.assertIn("aiostreams", ids)
 
 

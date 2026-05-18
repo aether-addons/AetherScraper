@@ -107,6 +107,7 @@ class Phase14TbTorznabProviderTests(unittest.TestCase):
 
         self.assertFalse(errors)
         self.assertIn("tbtorznab", ids)
+        self.assertNotIn("torbox_torznab", ids)
         self.assertEqual(ids["tbtorznab"].provider_type, "torrent")
         self.assertFalse(ids["tbtorznab"].enabled)
         self.assertTrue(ids["tbtorznab"].pack_capable)
@@ -115,6 +116,26 @@ class Phase14TbTorznabProviderTests(unittest.TestCase):
         self.assertEqual(
             ids["tbtorznab"].media_types, ["movie", "episode", "season", "show"]
         )
+
+    def test_tbtorznab_reads_legacy_torbox_torznab_settings(self):
+        settings = KodiSettings(
+            fallback={
+                "provider.torbox_torznab.base_url": self.base_url,
+                "provider.torbox_torznab.api_key": "legacy-key",
+                "provider.torbox_torznab.enabled": "true",
+            }
+        )
+        provider = TbTorznabProvider(settings=settings)
+
+        results = provider.search(
+            SearchQuery("Big Buck Bunny", media_type="movie", imdb_id="tt1254207"),
+            SearchOptions(max_results=3),
+        )
+
+        self.assertTrue(provider.is_enabled())
+        self.assertEqual(len(results), 1)
+        self.assertEqual(TbTorznabHandler.last_query["apikey"], ["legacy-key"])
+        self.assertEqual(TbTorznabHandler.last_query["limit"], ["3"])
 
 
 if __name__ == "__main__":

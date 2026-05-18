@@ -327,55 +327,30 @@
             <heading>30136</heading>
           </control>
         </setting>
-        <setting id="provider.tbtorznab.enabled" type="boolean" label="30144" help="30145">
+        <setting id="provider.tbtorznab.enabled" type="boolean" label="30150" help="30151">
           <level>1</level>
           <default>false</default>
           <control type="toggle" />
         </setting>
-        <setting id="provider.tbtorznab.base_url" type="string" label="30146" help="30147">
+        <setting id="provider.tbtorznab.base_url" type="string" label="30152" help="30153">
           <level>1</level>
           <default>https://search-api.torbox.app/torznab/api</default>
           <constraints>
             <allowempty>true</allowempty>
           </constraints>
           <control type="edit" format="string">
-            <heading>30146</heading>
+            <heading>30152</heading>
           </control>
         </setting>
-        <setting id="provider.tbtorznab.api_key" type="string" label="30148" help="30149">
+        <setting id="provider.tbtorznab.api_key" type="string" label="30154" help="30155">
           <level>1</level>
           <default />
           <constraints>
             <allowempty>true</allowempty>
           </constraints>
           <control type="edit" format="string">
-            <heading>30148</heading>
+            <heading>30154</heading>
             <hidden>true</hidden>
-          </control>
-        </setting>
-        <setting id="provider.torbox_torznab.enabled" type="boolean" label="30062" help="30063">
-          <level>1</level>
-          <default>false</default>
-          <control type="toggle" />
-        </setting>
-        <setting id="provider.torbox_torznab.base_url" type="string" label="30064" help="30065">
-          <level>1</level>
-          <default />
-          <constraints>
-            <allowempty>true</allowempty>
-          </constraints>
-          <control type="edit" format="string">
-            <heading>30064</heading>
-          </control>
-        </setting>
-        <setting id="provider.torbox_torznab.api_key" type="string" label="30066" help="30067">
-          <level>1</level>
-          <default />
-          <constraints>
-            <allowempty>true</allowempty>
-          </constraints>
-          <control type="edit" format="string">
-            <heading>30066</heading>
           </control>
         </setting>
         <setting id="provider.aiostreams.enabled" type="boolean" label="30068" help="30069">
