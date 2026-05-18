@@ -39,11 +39,15 @@ QUALITY_WEIGHTS: dict[str, int] = {
 @dataclass(frozen=True)
 class KodiUiSettings:
     color_tags: bool = True
+    result_format: str = "list"
+    highlight_type: str = "resolution"
+    color_single: str = "dodgerblue"
     color_4k: str = "gold"
     color_1080p: str = "deepskyblue"
     color_720p: str = "limegreen"
     color_cam: str = "red"
     color_scr: str = "orange"
+    color_sd: str = "green"
     color_direct: str = "white"
     autoplay_policy: str = "score_quality_size"
 
@@ -52,11 +56,15 @@ class KodiUiSettings:
         settings = settings or KodiSettings()
         return cls(
             color_tags=settings.get_bool("ui_color_tags", True),
+            result_format=settings.get_string("ui_result_format", "list"),
+            highlight_type=settings.get_string("ui_highlight_type", "resolution"),
+            color_single=settings.get_string("ui_color_single", "dodgerblue"),
             color_4k=settings.get_string("ui_color_4k", "gold"),
             color_1080p=settings.get_string("ui_color_1080p", "deepskyblue"),
             color_720p=settings.get_string("ui_color_720p", "limegreen"),
             color_cam=settings.get_string("ui_color_cam", "red"),
             color_scr=settings.get_string("ui_color_scr", "orange"),
+            color_sd=settings.get_string("ui_color_sd", "green"),
             color_direct=settings.get_string("ui_color_direct", "white"),
             autoplay_policy=settings.get_string(
                 "ui_autoplay_policy", "score_quality_size"
@@ -151,7 +159,8 @@ def format_source_label(
         parts.append(source.provider)
     if source.language:
         parts.append(source.language)
-    label = " | ".join(str(part) for part in parts if part)
+    separator = "  •  " if settings.result_format == "wide" else " | "
+    label = separator.join(str(part) for part in parts if part)
     color = _source_color(source, settings)
     if settings.color_tags and color:
         return f"[COLOR {color}]{label}[/COLOR]"
@@ -358,6 +367,8 @@ def pick_highlight_color(
 
 
 def _source_color(source: SourceResult, settings: KodiUiSettings) -> str:
+    if settings.highlight_type == "single_color":
+        return settings.color_single
     quality = (source.quality or "").strip().lower()
     if quality in {"4k", "2160p"}:
         return settings.color_4k
@@ -369,6 +380,8 @@ def _source_color(source: SourceResult, settings: KodiUiSettings) -> str:
         return settings.color_cam
     if quality == "scr":
         return settings.color_scr
+    if quality in {"sd", "480p"}:
+        return settings.color_sd
     if source.direct:
         return settings.color_direct
     return ""

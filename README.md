@@ -13,7 +13,13 @@ https://github.com/aether-addons/AetherRepo
 - `script.module.aetherscraper` — shared scraper/provider module
 - `plugin.program.aetherscraper` — Kodi Program add-on companion UI
 
-Reference folders such as `plugin.video.umbrella`, `plugin.video.fenlight`, and `script.module.magneto` are for compatibility research only unless explicitly promoted.
+Reference/example add-ons live under ignored `examples/`:
+
+- `examples/plugin.video.umbrella`
+- `examples/plugin.video.fenlight`
+- `examples/script.module.magneto`
+
+They are for compatibility research only unless explicitly promoted into first-party source.
 
 ## Validate
 

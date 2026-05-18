@@ -431,7 +431,7 @@ Missing in AetherScraper / needs verification:
 
 ## 2026-05-18 parity audit additions
 
-Audit sources: local `script.module.magneto`, `plugin.video.umbrella`, and `plugin.video.fenlight` references.
+Audit sources: local `examples/script.module.magneto`, `examples/plugin.video.umbrella`, and `examples/plugin.video.fenlight` references.
 
 ### Magneto settings IDs that must be covered or deliberately mapped
 

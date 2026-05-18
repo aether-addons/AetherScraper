@@ -23,16 +23,22 @@ _DEFAULTS: dict[str, str] = {
     "filter_foreign_audio": "false",
     "use_default_undesirables": "true",
     "undesirable_keywords": "",
+    "language_filter_enabled": "false",
+    "priority_language": "en",
     "support_file_logging": "false",
     "support_log_level": "info",
     "support_redact_secrets": "true",
     "support_max_log_bytes": "262144",
     "ui_color_tags": "true",
+    "ui_result_format": "list",
+    "ui_highlight_type": "resolution",
+    "ui_color_single": "dodgerblue",
     "ui_color_4k": "gold",
     "ui_color_1080p": "deepskyblue",
     "ui_color_720p": "limegreen",
     "ui_color_cam": "red",
     "ui_color_scr": "orange",
+    "ui_color_sd": "green",
     "ui_color_direct": "white",
     "ui_autoplay_policy": "score_quality_size",
     "provider.torznab.enabled": "false",
@@ -52,6 +58,42 @@ _DEFAULTS: dict[str, str] = {
     "provider.ytsmx.base_url": "https://yts.mx/api/v2/list_movies.json",
 }
 
+_SETTING_ALIASES: dict[str, tuple[str, ...]] = {
+    "scrape_timeout": ("scraping_timeout",),
+    "filter_foreign_audio": ("filter.foreign.single.audio",),
+    "language_filter_enabled": ("results.language_filter",),
+    "priority_language": ("results.language",),
+    "ui_result_format": ("results.list_format",),
+    "ui_highlight_type": ("highlight.type",),
+    "ui_color_single": ("scraper_single_highlight",),
+    "ui_color_4k": ("scraper_4k_highlight",),
+    "ui_color_1080p": ("scraper_1080p_highlight",),
+    "ui_color_720p": ("scraper_720p_highlight",),
+    "ui_color_sd": ("scraper_SD_highlight",),
+}
+_LANGUAGE_CODES = {
+    "english": "en",
+    "en": "en",
+    "french": "fr",
+    "fr": "fr",
+    "spanish": "es",
+    "es": "es",
+    "german": "de",
+    "de": "de",
+    "italian": "it",
+    "it": "it",
+    "japanese": "ja",
+    "ja": "ja",
+    "korean": "ko",
+    "ko": "ko",
+    "chinese": "zh",
+    "zh": "zh",
+    "portuguese": "pt",
+    "pt": "pt",
+    "russian": "ru",
+    "ru": "ru",
+}
+
 
 class KodiSettings:
     """Kodi add-on settings wrapper with non-Kodi fallback storage.
@@ -69,7 +111,14 @@ class KodiSettings:
         self.addon_id = addon_id
         self._fallback = dict(_DEFAULTS)
         if fallback:
-            self._fallback.update({key: str(value) for key, value in fallback.items()})
+            normalized = {key: str(value) for key, value in fallback.items()}
+            self._fallback.update(normalized)
+            for canonical, aliases in _SETTING_ALIASES.items():
+                if canonical not in normalized:
+                    for alias in aliases:
+                        if alias in normalized:
+                            self._fallback[canonical] = normalized[alias]
+                            break
         self._addon = addon if addon is not None else self._load_addon(addon_id)
 
     @property
@@ -77,10 +126,15 @@ class KodiSettings:
         return self._addon is not None
 
     def get_string(self, key: str, default: str = "") -> str:
-        value = self._get_from_kodi(key)
-        if value is None or value == "":
-            return self._fallback.get(key, default)
-        return value
+        for candidate in self._setting_candidates(key):
+            value = self._get_from_kodi(candidate)
+            if value is not None and value != "":
+                return value
+        for candidate in self._setting_candidates(key):
+            value = self._fallback.get(candidate)
+            if value is not None and value != "":
+                return value
+        return self._fallback.get(key, default)
 
     def get_bool(self, key: str, default: bool = False) -> bool:
         value = self.get_string(key, str(default)).strip().lower()
@@ -112,6 +166,22 @@ class KodiSettings:
 
     def snapshot(self) -> SettingsSnapshot:
         return SettingsSnapshot.from_settings(self)
+
+    @staticmethod
+    def _setting_candidates(key: str) -> tuple[str, ...]:
+        candidates = [key]
+        aliases = list(_SETTING_ALIASES.get(key, ()))
+        aliases.extend(
+            canonical
+            for canonical, canonical_aliases in _SETTING_ALIASES.items()
+            if key in canonical_aliases
+        )
+        if key.startswith("provider.") and key.endswith(".enabled"):
+            aliases.append(key[: -len(".enabled")])
+        elif key.startswith("provider.") and not key.endswith(".enabled"):
+            aliases.append(key + ".enabled")
+        candidates.extend(item for item in aliases if item not in candidates)
+        return tuple(candidates)
 
     def _get_from_kodi(self, key: str) -> str | None:
         if self._addon is None:
@@ -147,15 +217,22 @@ class KodiSettings:
             "filter_dolby_vision",
             "filter_hdr",
             "filter_foreign_audio",
+            "filter.foreign.single.audio",
             "use_default_undesirables",
+            "language_filter_enabled",
+            "results.language_filter",
             "concurrent_scraping",
             "support_file_logging",
             "support_redact_secrets",
             "ui_color_tags",
-        } or (key.startswith("provider.") and key.endswith(".enabled")):
+        } or (
+            key.startswith("provider.")
+            and (key.endswith(".enabled") or key.count(".") == 1)
+        ):
             return "getSettingBool"
         if key in {
             "scrape_timeout",
+            "scraping_timeout",
             "max_results",
             "provider_timeout",
             "provider_retries",
@@ -189,6 +266,9 @@ class SettingsSnapshot:
     filter_foreign_audio: bool = False
     use_default_undesirables: bool = True
     undesirable_keywords: list[str] = field(default_factory=list)
+    language_filter_enabled: bool = False
+    priority_language: str = "en"
+    languages: list[str] = field(default_factory=list)
     extra: dict[str, str] = field(default_factory=dict)
 
     @classmethod
@@ -213,6 +293,11 @@ class SettingsSnapshot:
             undesirable_keywords=parse_keyword_list(
                 settings.get_string("undesirable_keywords", "")
             ),
+            language_filter_enabled=settings.get_bool("language_filter_enabled", False),
+            priority_language=language_code(
+                settings.get_string("priority_language", "en")
+            ),
+            languages=language_filter_list(settings),
         )
 
     @classmethod
@@ -250,8 +335,30 @@ class SettingsSnapshot:
             "undesirable_keywords": os.getenv(
                 prefix + "UNDESIRABLE_KEYWORDS", _DEFAULTS["undesirable_keywords"]
             ),
+            "language_filter_enabled": os.getenv(
+                prefix + "LANGUAGE_FILTER_ENABLED",
+                _DEFAULTS["language_filter_enabled"],
+            ),
+            "priority_language": os.getenv(
+                prefix + "PRIORITY_LANGUAGE", _DEFAULTS["priority_language"]
+            ),
         }
         return KodiSettings(fallback=fallback).snapshot()
+
+
+def language_code(value: str) -> str:
+    text = str(value or "").strip().lower().replace("_", "-")
+    if not text:
+        return "en"
+    if text in _LANGUAGE_CODES:
+        return _LANGUAGE_CODES[text]
+    return text.split("-", 1)[0]
+
+
+def language_filter_list(settings: KodiSettings) -> list[str]:
+    if not settings.get_bool("language_filter_enabled", False):
+        return []
+    return [language_code(settings.get_string("priority_language", "en"))]
 
 
 def provider_enabled_setting(provider_id: str) -> str:

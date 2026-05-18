@@ -54,6 +54,60 @@ How future agents should avoid it.
 
 ## Issues
 
+## 2026-05-18 — Magneto setting aliases must override fallback defaults
+
+Status: fixed
+Area: settings
+
+### Symptom
+
+Magneto-style alias settings such as `scraping_timeout` could be ignored outside Kodi because canonical fallback defaults like `scrape_timeout=30` were read first.
+
+### Cause
+
+`KodiSettings` merges built-in defaults with fallback values. Alias lookups checked canonical keys before aliases, so default canonical values masked user-provided alias values.
+
+### Fix / Decision
+
+Normalize known aliases into canonical fallback keys during `KodiSettings` initialization when the caller did not provide the canonical key. Keep dynamic provider aliases (`provider.<id>` ↔ `provider.<id>.enabled`) in lookup candidates.
+
+### Prevention
+
+When adding compatibility aliases, test both direct canonical ids and legacy alias ids against fallback settings, not only Kodi XML defaults.
+
+### References
+
+- `script.module.aetherscraper/lib/aetherscraper/kodi/settings.py`
+- `tests/test_phase1_settings_storage.py`
+- `AETHERSCRAPER_FEATURE_PARITY_CHECKLIST.md` Phase 13.5
+
+## 2026-05-18 — Umbrella uncached seeder sort expects seeders key
+
+Status: fixed
+Area: Kodi
+
+### Symptom
+
+Umbrella can sort uncached torrent results with `k['seeders']`, which can raise/display poorly if external source dicts omit `seeders`.
+
+### Cause
+
+AetherScraper external bridge only emitted core Magneto-style keys plus hash/pack metadata, while Umbrella/FenLight consumers also use optional compatibility fields.
+
+### Fix / Decision
+
+Emit torrent `seeders` with safe default `0`, `true_size` for trusted size values, and `usenet` for Usenet metadata. Keep title-derived size as `true_size=False`.
+
+### Prevention
+
+When changing external source dict conversion, validate optional consumer fields, not only core keys.
+
+### References
+
+- `script.module.aetherscraper/lib/aetherscraper/external.py`
+- `tests/test_phase13_5_umbrella_bridge.py`
+- `AETHERSCRAPER_FEATURE_PARITY_CHECKLIST.md` Phase 13.5
+
 ## 2026-05-18 — MediaPlay selector route belongs to companion plugin
 
 Status: decision
@@ -88,7 +142,7 @@ Area: Kodi
 
 ### Symptom
 
-`script.module.aetherscraper` does not appear under Kodi Program add-ons, while `script.module.magneto` may appear there.
+`script.module.aetherscraper` does not appear under Kodi Program add-ons, while `examples/script.module.magneto` may appear there.
 
 ### Cause
 
@@ -376,8 +430,8 @@ Do not treat Kodi video-addon visibility as external-provider compatibility. Umb
 
 ### References
 
-- `plugin.video.umbrella/resources/lib/modules/tools.py`
-- `plugin.video.umbrella/resources/lib/modules/sources.py`
+- `examples/plugin.video.umbrella/resources/lib/modules/tools.py`
+- `examples/plugin.video.umbrella/resources/lib/modules/sources.py`
 - `AETHERSCRAPER_FEATURE_PARITY_PLAN.md` Phase 13.5
 - `AETHERSCRAPER_FEATURE_PARITY_CHECKLIST.md` Phase 13.5
 
@@ -815,11 +869,11 @@ Before declaring external-provider parity, test all consumer import paths: `sour
 
 ### References
 
-- `plugin.video.fenlight/resources/lib/indexers/dialogs.py`
-- `plugin.video.fenlight/resources/lib/scrapers/external.py`
-- `plugin.video.umbrella/resources/lib/modules/tools.py`
-- `plugin.video.umbrella/resources/lib/modules/sources.py`
-- `script.module.magneto/lib/magneto/__init__.py`
+- `examples/plugin.video.fenlight/resources/lib/indexers/dialogs.py`
+- `examples/plugin.video.fenlight/resources/lib/scrapers/external.py`
+- `examples/plugin.video.umbrella/resources/lib/modules/tools.py`
+- `examples/plugin.video.umbrella/resources/lib/modules/sources.py`
+- `examples/script.module.magneto/lib/magneto/__init__.py`
 - `AETHERSCRAPER_FEATURE_PARITY_PLAN.md` Phase 13.5
 - `AETHERSCRAPER_FEATURE_PARITY_CHECKLIST.md` Phase 13.5
 
@@ -849,7 +903,36 @@ Before declaring parity, audit Magneto settings XML, provider attrs/methods, sou
 - `AETHERSCRAPER_MISSING_FEATURES.md` — 2026-05-18 parity audit additions
 - `AETHERSCRAPER_FEATURE_PARITY_PLAN.md` Phase 13.5 / Phase 15
 - `AETHERSCRAPER_FEATURE_PARITY_CHECKLIST.md` Phase 13.5 / Global parity audit follow-ups
-- `script.module.magneto/resources/settings.xml`
-- `script.module.magneto/lib/magneto/providers/torrents/`
-- `plugin.video.umbrella/resources/lib/modules/sources.py`
-- `plugin.video.fenlight/resources/lib/scrapers/external.py`
+- `examples/script.module.magneto/resources/settings.xml`
+- `examples/script.module.magneto/lib/magneto/providers/torrents/`
+- `examples/plugin.video.umbrella/resources/lib/modules/sources.py`
+- `examples/plugin.video.fenlight/resources/lib/scrapers/external.py`
+
+## 2026-05-18 — Local reference add-ons live under ignored examples folder
+
+Status: decision
+Area: docs
+
+### Symptom
+
+Root-level third-party/reference add-on folders cluttered repository layout and required per-add-on `.gitignore` entries.
+
+### Cause
+
+Local compatibility examples (`plugin.video.umbrella`, `plugin.video.fenlight`, `script.module.magneto`) are not first-party hosted add-ons.
+
+### Fix / Decision
+
+Move local reference/example add-ons under `examples/` and ignore that folder as one local-only workspace.
+
+### Prevention
+
+Keep first-party hosted add-ons at repository root. Put local compatibility/reference add-ons in `examples/` unless explicitly promoted.
+
+### References
+
+- `.gitignore`
+- `README.md`
+- `examples/plugin.video.umbrella`
+- `examples/plugin.video.fenlight`
+- `examples/script.module.magneto`

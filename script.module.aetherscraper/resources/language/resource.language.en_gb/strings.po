@@ -159,6 +159,18 @@ msgctxt "#30046"
 msgid "Comma-separated keywords to exclude from release titles."
 msgstr "Comma-separated keywords to exclude from release titles."
 
+msgctxt "#30047"
+msgid "Filter by priority language"
+msgstr "Filter by priority language"
+
+msgctxt "#30048"
+msgid "When enabled, keep only sources matching the configured language code/name."
+msgstr "When enabled, keep only sources matching the configured language code/name."
+
+msgctxt "#30049"
+msgid "Priority language"
+msgstr "Priority language"
+
 msgctxt "#30050"
 msgid "Generic Torznab provider"
 msgstr "Generic Torznab provider"
@@ -419,6 +431,38 @@ msgctxt "#30109"
 msgid "Size, quality, score"
 msgstr "Size, quality, score"
 
+msgctxt "#30122"
+msgid "Result format"
+msgstr "Result format"
+
+msgctxt "#30123"
+msgid "Controls source-label separator style for Kodi source lists."
+msgstr "Controls source-label separator style for Kodi source lists."
+
+msgctxt "#30124"
+msgid "List"
+msgstr "List"
+
+msgctxt "#30125"
+msgid "Wide list"
+msgstr "Wide list"
+
+msgctxt "#30126"
+msgid "Highlight type"
+msgstr "Highlight type"
+
+msgctxt "#30127"
+msgid "Choose resolution-based colors or one color for every source label."
+msgstr "Choose resolution-based colors or one color for every source label."
+
+msgctxt "#30128"
+msgid "Resolution"
+msgstr "Resolution"
+
+msgctxt "#30129"
+msgid "Single color"
+msgstr "Single color"
+
 msgctxt "#30110"
 msgid "4K highlight color"
 msgstr "4K highlight color"
@@ -466,3 +510,19 @@ msgstr "Direct-source highlight color"
 msgctxt "#30121"
 msgid "Kodi color name used for direct sources when no quality color applies."
 msgstr "Kodi color name used for direct sources when no quality color applies."
+
+msgctxt "#30144"
+msgid "Single highlight color"
+msgstr "Single highlight color"
+
+msgctxt "#30145"
+msgid "Kodi color name used when highlight type is single color."
+msgstr "Kodi color name used when highlight type is single color."
+
+msgctxt "#30146"
+msgid "SD highlight color"
+msgstr "SD highlight color"
+
+msgctxt "#30147"
+msgid "Kodi color name used for SD/480p sources."
+msgstr "Kodi color name used for SD/480p sources."

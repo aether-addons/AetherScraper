@@ -283,6 +283,7 @@ def _replace_options(
 
 def _source_to_umbrella(result: SourceResult, pack: bool = False) -> dict[str, Any]:
     source = _source_kind(result)
+    size_bytes, true_size = _source_size_info(result)
     item: dict[str, Any] = {
         "provider": result.provider,
         "source": source,
@@ -294,8 +295,13 @@ def _source_to_umbrella(result: SourceResult, pack: bool = False) -> dict[str, A
         "info": _info_label(result),
         "direct": bool(result.direct),
         "debridonly": source == "torrent",
-        "size": _source_size_gb(result),
+        "size": _size_gb(size_bytes),
+        "true_size": true_size,
     }
+    if source == "torrent" or "seeders" in result.metadata:
+        item["seeders"] = _source_seeders(result)
+    if _source_is_usenet(result, source):
+        item["usenet"] = True
     info_hash = result.metadata.get("info_hash") or result.metadata.get("hash")
     if info_hash:
         item["hash"] = info_hash
@@ -312,7 +318,9 @@ def _source_to_umbrella(result: SourceResult, pack: bool = False) -> dict[str, A
 
 def _source_kind(result: SourceResult) -> str:
     url = result.url.lower()
-    provider_type = result.metadata.get("provider_type", "")
+    provider_type = str(result.metadata.get("provider_type", "")).lower()
+    if provider_type == "usenet":
+        return "usenet"
     if url.startswith("magnet:") or provider_type == "torrent":
         return "torrent"
     if result.direct:
@@ -335,7 +343,7 @@ def _umbrella_quality(quality: str | None) -> str:
 
 def _info_label(result: SourceResult) -> str:
     parts = []
-    size = _source_size_bytes(result)
+    size, _ = _source_size_info(result)
     if size:
         parts.append(f"{_size_gb(size):.2f} GB")
     codec = result.metadata.get("codec")
@@ -348,19 +356,39 @@ def _info_label(result: SourceResult) -> str:
 
 
 def _source_size_bytes(result: SourceResult) -> int | None:
-    return parse_size_candidates(
+    size, _ = _source_size_info(result)
+    return size
+
+
+def _source_size_info(result: SourceResult) -> tuple[int | None, bool]:
+    trusted = parse_size_candidates(
         result.size,
         result.metadata.get("size_bytes"),
         result.metadata.get("filesize"),
         result.metadata.get("file_size"),
         result.metadata.get("size"),
         result.metadata.get("size_label"),
-        result.title,
     )
+    if trusted is not None:
+        return trusted, True
+    fallback = parse_size_candidates(result.title)
+    return fallback, False
 
 
 def _source_size_gb(result: SourceResult) -> float:
     return _size_gb(_source_size_bytes(result))
+
+
+def _source_seeders(result: SourceResult) -> int:
+    for key in ("seeders", "seeds", "seed"):
+        value = _int_value(result.metadata.get(key), None)
+        if isinstance(value, int) and value >= 0:
+            return value
+    return max(0, int(result.score)) if result.score else 0
+
+
+def _source_is_usenet(result: SourceResult, source: str) -> bool:
+    return source == "usenet" or _bool_value(result.metadata.get("usenet"))
 
 
 def _size_gb(size: int | None) -> float:

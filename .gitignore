@@ -21,10 +21,8 @@ build/
 *.sqlite3
 *.db
 
-# Third-party/reference-only add-ons; keep out of first-party source repo unless promoted.
-plugin.video.fenlight/
-plugin.video.umbrella/
-script.module.magneto/
+# Third-party/reference-only example add-ons; keep out of first-party source repo unless promoted.
+examples/
 
 # OS/editor noise
 .DS_Store

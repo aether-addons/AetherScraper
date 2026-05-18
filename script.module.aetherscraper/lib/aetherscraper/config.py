@@ -56,6 +56,7 @@ class GlobalConfig:
     allow_dolby_vision: bool = True
     allow_hdr: bool = True
     allow_foreign_audio: bool = True
+    languages: list[str] = field(default_factory=list)
     undesirable_keywords: list[str] = field(default_factory=list)
     use_default_undesirables: bool = True
     extra: dict[str, Any] = field(default_factory=dict)
@@ -68,6 +69,7 @@ class GlobalConfig:
             allow_dolby_vision=self.allow_dolby_vision,
             allow_hdr=self.allow_hdr,
             allow_foreign_audio=self.allow_foreign_audio,
+            languages=list(self.languages),
             undesirable_keywords=list(self.undesirable_keywords),
             use_default_undesirables=self.use_default_undesirables,
             extra=dict(self.extra),
@@ -92,6 +94,7 @@ class GlobalConfig:
             allow_dolby_vision=not snapshot.filter_dolby_vision,
             allow_hdr=not snapshot.filter_hdr,
             allow_foreign_audio=not snapshot.filter_foreign_audio,
+            languages=list(snapshot.languages),
             undesirable_keywords=list(snapshot.undesirable_keywords),
             use_default_undesirables=snapshot.use_default_undesirables,
         )

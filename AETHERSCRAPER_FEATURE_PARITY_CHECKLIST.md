@@ -13,6 +13,15 @@ Legend:
 - `[x]` complete
 - `[!]` blocked / needs decision
 
+## Maintenance — Docs and local examples
+
+- [x] Move local reference/example add-ons under ignored `examples/`.
+- [x] Update docs for AetherRepo naming, current module dependency version, and example paths.
+
+Validation notes:
+
+- Passed 2026-05-18: `python3 scripts/validate_addons.py .`; `PYTHONPATH=script.module.aetherscraper/lib:plugin.program.aetherscraper/resources/lib python3 -m pytest -q`; XML parse check for hosted add-on manifests/settings and selector JSON.
+
 ## Phase 0 — Baseline audit
 
 - [x] Audit current package API.
@@ -300,8 +309,8 @@ Validation notes:
 
 ## Phase 13.5 — Umbrella / FenLight / external-provider compatibility bridge
 
-- [x] Inspect local `plugin.video.umbrella` external-provider selection and scrape contracts.
-- [x] Inspect local `plugin.video.fenlight` external-scraper selection and scrape contracts.
+- [x] Inspect local `examples/plugin.video.umbrella` external-provider selection and scrape contracts.
+- [x] Inspect local `examples/plugin.video.fenlight` external-scraper selection and scrape contracts.
 - [x] Add importable `aetherscraper.sources()` surface for Umbrella validation.
 - [x] Match Magneto signature: `sources(specified_folders=None, ret_all=False)`.
 - [x] Support FenLight selection call: `sources(specified_folders=['torrents'])`.
@@ -322,15 +331,15 @@ Validation notes:
 - [x] Convert AetherScraper `SourceResult` objects to Umbrella-compatible source dictionaries.
 - [x] Verify FenLight-compatible source dicts: `provider`, `source`, `name`, `name_info`, `quality`, `language`, `url`, `info`, `direct`, `debridonly`, `size` in GB, `hash` for torrents.
 - [x] Preserve external cache/dedupe behavior with stable provider id, URL, hash, direct-vs-torrent, package fields, and sane size values.
-- [ ] Add or verify external source fields beyond core keys: `seeders`, `true_size`, `usenet`, and consumer-added cache/display compatibility behavior.
-- [ ] Add or verify Magneto-style settings behavior mappings for provider enable flags, scrape timeout, filters, language options, result formatting, and highlight colors.
+- [x] Add or verify external source fields beyond core keys: `seeders`, `true_size`, `usenet`, and consumer-added cache/display compatibility behavior.
+- [x] Add or verify Magneto-style settings behavior mappings for provider enable flags, scrape timeout, filters, language options, result formatting, and highlight colors.
 - [x] Add `resources/aetherscraper.select.json` for AIOStreams/player-selector Magneto parity.
 - [x] Add `MediaPlay` plugin action alias for selector JSON and map it to safe source selection/playback.
 - [!] Prove `plugin://script.module.aetherscraper/?action=MediaPlay` works in Kodi despite module-only manifest, split route into a companion plugin, or document as unsupported.
 - [x] Add tests with Umbrella contract fixtures and import smoke test.
 - [x] Add tests with FenLight contract fixtures and import smoke test.
-- [ ] README/help update with Umbrella setup steps.
-- [ ] README/help update with FenLight setup steps.
+- [x] README/help update with Umbrella setup steps.
+- [x] README/help update with FenLight setup steps.
 - [!] Manual Kodi/Umbrella validation: Tools > Providers > Enable External Providers / External Provider accepts AetherScraper.
 - [!] Manual Kodi/FenLight validation: External Scraper picker accepts AetherScraper and scrape runs.
 
@@ -346,7 +355,12 @@ Validation notes:
 - Passed 2026-05-16: LSP diagnostics for `script.module.aetherscraper/lib/aetherscraper` and `tests`; `PYTHONPATH=script.module.aetherscraper/lib python3 -m compileall -q script.module.aetherscraper/lib tests script.module.aetherscraper/default.py script.module.aetherscraper/service.py`; `PYTHONPATH=script.module.aetherscraper/lib python3 -m unittest discover -s tests` (87 tests); `python3 -m ruff check script.module.aetherscraper/lib tests script.module.aetherscraper/default.py script.module.aetherscraper/service.py`; XML parse check for `addon.xml` and `resources/settings.xml`; JSON parse check for `resources/aetherscraper.select.json`.
 - Passed 2026-05-16 size-fix validation: LSP diagnostics for changed Python files; `PYTHONPATH=script.module.aetherscraper/lib python3 -m compileall -q script.module.aetherscraper/lib tests`; `PYTHONPATH=script.module.aetherscraper/lib python3 -m unittest discover -s tests` (88 tests); `python3 -m ruff check script.module.aetherscraper/lib tests script.module.aetherscraper/default.py script.module.aetherscraper/service.py`.
 - Passed 2026-05-17 root size/settings validation: LSP diagnostics for changed Python files; `PYTHONPATH=script.module.aetherscraper/lib python3 -m compileall -q script.module.aetherscraper/lib tests`; `PYTHONPATH=script.module.aetherscraper/lib python3 -m unittest discover -s tests` (90 tests); `python3 -m ruff check script.module.aetherscraper/lib tests script.module.aetherscraper/default.py script.module.aetherscraper/service.py`; XML parse check for `addon.xml` and `resources/settings.xml`; empty string settings checked for `<allowempty>true</allowempty>`.
+- Added 2026-05-18 external consumer fields: source dictionaries now include `true_size`, torrent `seeders` defaulting safely for Umbrella uncached seeder sort, and `usenet` when source/provider metadata indicates Usenet. Title-derived size remains `true_size=False`.
+- Passed 2026-05-18 external-field validation: LSP diagnostics for changed Python files; `PYTHONPATH=script.module.aetherscraper/lib python3 -m unittest discover -s tests -p 'test_phase13_5_umbrella_bridge.py' -v`; `PYTHONPATH=script.module.aetherscraper/lib:plugin.program.aetherscraper/resources/lib python3 -m compileall -q script.module.aetherscraper/lib plugin.program.aetherscraper/resources/lib plugin.program.aetherscraper/default.py tests`; `PYTHONPATH=script.module.aetherscraper/lib:plugin.program.aetherscraper/resources/lib python3 -m unittest discover -s tests` (98 tests); `python3 -m ruff check script.module.aetherscraper/lib plugin.program.aetherscraper/resources/lib plugin.program.aetherscraper/default.py tests`.
 - Manual Kodi/Umbrella and Kodi/FenLight validation pending in Kodi UI.
+- Added 2026-05-18 Magneto-style settings aliases: provider enable flags (`provider.<id>`), scrape timeout (`scraping_timeout`), foreign-audio filter (`filter.foreign.single.audio`), priority language (`results.language_filter` / `results.language`), result format (`results.list_format`), highlight type (`highlight.type`), and `scraper_*_highlight` colors. Priority language now maps into `SearchOptions.languages`; UI helpers honor wide labels and single-color highlight mode. Bumped `script.module.aetherscraper` to `0.1.3`.
+- Initial targeted unittest command failed because `tests.*` is not importable as a package: `PYTHONPATH=script.module.aetherscraper/lib:plugin.program.aetherscraper/resources/lib python3 -m unittest tests.test_phase1_settings_storage tests.test_phase13_kodi_ui_playback -v`. Corrected with unittest discover patterns.
+- Passed 2026-05-18 settings-alias validation: LSP diagnostics for changed Python/tests; `PYTHONPATH=script.module.aetherscraper/lib:plugin.program.aetherscraper/resources/lib python3 -m unittest discover -s tests -p 'test_phase1_settings_storage.py' -v`; `PYTHONPATH=script.module.aetherscraper/lib:plugin.program.aetherscraper/resources/lib python3 -m unittest discover -s tests -p 'test_phase13_kodi_ui_playback.py' -v`; `PYTHONPATH=script.module.aetherscraper/lib:plugin.program.aetherscraper/resources/lib python3 -m compileall -q script.module.aetherscraper/lib plugin.program.aetherscraper/resources/lib plugin.program.aetherscraper/default.py tests`; `PYTHONPATH=script.module.aetherscraper/lib:plugin.program.aetherscraper/resources/lib python3 -m unittest discover -s tests` (100 tests); `python3 -m ruff check script.module.aetherscraper/lib plugin.program.aetherscraper/resources/lib plugin.program.aetherscraper/default.py tests`; XML parse check for hosted add-on manifests/settings and JSON parse check for selector JSON.
 
 ## Phase 13.6 — Companion Program add-on for visible Kodi launcher
 

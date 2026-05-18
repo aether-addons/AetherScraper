@@ -101,6 +101,18 @@
             <heading>30045</heading>
           </control>
         </setting>
+        <setting id="language_filter_enabled" type="boolean" label="30047" help="30048">
+          <level>1</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="priority_language" type="string" label="30049" help="30048">
+          <level>1</level>
+          <default>en</default>
+          <control type="edit" format="string">
+            <heading>30049</heading>
+          </control>
+        </setting>
       </group>
     </category>
     <category id="support" label="30080" help="30081">
@@ -150,6 +162,32 @@
           <default>true</default>
           <control type="toggle" />
         </setting>
+        <setting id="ui_result_format" type="string" label="30122" help="30123">
+          <level>1</level>
+          <default>list</default>
+          <constraints>
+            <options>
+              <option label="30124">list</option>
+              <option label="30125">wide</option>
+            </options>
+          </constraints>
+          <control type="list" format="string">
+            <heading>30122</heading>
+          </control>
+        </setting>
+        <setting id="ui_highlight_type" type="string" label="30126" help="30127">
+          <level>1</level>
+          <default>resolution</default>
+          <constraints>
+            <options>
+              <option label="30128">resolution</option>
+              <option label="30129">single_color</option>
+            </options>
+          </constraints>
+          <control type="list" format="string">
+            <heading>30126</heading>
+          </control>
+        </setting>
         <setting id="ui_autoplay_policy" type="string" label="30105" help="30106">
           <level>1</level>
           <default>score_quality_size</default>
@@ -163,6 +201,11 @@
           <control type="list" format="string">
             <heading>30105</heading>
           </control>
+        </setting>
+        <setting id="ui_color_single" type="string" label="30144" help="30145">
+          <level>1</level>
+          <default>dodgerblue</default>
+          <control type="edit" format="string"><heading>30144</heading></control>
         </setting>
         <setting id="ui_color_4k" type="string" label="30110" help="30111">
           <level>1</level>
@@ -188,6 +231,11 @@
           <level>1</level>
           <default>orange</default>
           <control type="edit" format="string"><heading>30118</heading></control>
+        </setting>
+        <setting id="ui_color_sd" type="string" label="30146" help="30147">
+          <level>1</level>
+          <default>green</default>
+          <control type="edit" format="string"><heading>30146</heading></control>
         </setting>
         <setting id="ui_color_direct" type="string" label="30120" help="30121">
           <level>1</level>

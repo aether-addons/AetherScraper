@@ -186,6 +186,26 @@ class KodiUiPlaybackTests(unittest.TestCase):
         self.assertEqual(settings.get_string("ui_color_1080p"), "green")
         self.assertTrue(result.ok)
 
+    def test_magneto_style_ui_settings_aliases(self) -> None:
+        settings = KodiUiSettings.from_settings(
+            KodiSettings(
+                fallback={
+                    "results.list_format": "wide",
+                    "highlight.type": "single_color",
+                    "scraper_single_highlight": "magenta",
+                },
+                addon=None,
+            )
+        )
+        url, item, is_folder = build_source_listitem(
+            self.source(title="Movie", quality="720p"), settings=settings
+        )
+
+        self.assertEqual(url, "https://example.invalid/video.mp4")
+        self.assertFalse(is_folder)
+        self.assertIn("  •  ", cast(Any, item).label)
+        self.assertTrue(cast(Any, item).label.startswith("[COLOR magenta]"))
+
 
 if __name__ == "__main__":
     unittest.main()

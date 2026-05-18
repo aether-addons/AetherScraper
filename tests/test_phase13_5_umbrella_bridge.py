@@ -139,6 +139,8 @@ class Phase135UmbrellaBridgeTests(unittest.TestCase):
         self.assertEqual(result[0]["source"], "torrent")
         self.assertEqual(result[0]["hash"], "abcdef")
         self.assertEqual(result[0]["size"], 2.0)
+        self.assertTrue(result[0]["true_size"])
+        self.assertEqual(result[0]["seeders"], 0)
         self.assertIn("HEVC", result[0]["info"])
 
     def test_episode_and_pack_payloads_map_to_manager(self) -> None:
@@ -205,6 +207,8 @@ class Phase135UmbrellaBridgeTests(unittest.TestCase):
         )
 
         self.assertEqual(item["size"], 2.328)
+        self.assertFalse(item["true_size"])
+        self.assertEqual(item["seeders"], 0)
         self.assertIn("2.33 GB", item["info"])
 
     def test_source_result_conversion_clamps_implausible_size(self) -> None:
@@ -218,7 +222,32 @@ class Phase135UmbrellaBridgeTests(unittest.TestCase):
         )
 
         self.assertEqual(item["size"], 0.0)
+        self.assertFalse(item["true_size"])
         self.assertNotIn("246800", item["info"])
+
+    def test_source_result_conversion_exposes_external_consumer_fields(self) -> None:
+        torrent = _source_to_umbrella(
+            SourceResult(
+                "torrentio",
+                "Name",
+                "magnet:?xt=urn:btih:" + "b" * 40,
+                metadata={"seeders": "42", "size_bytes": str(3 * 1024**3)},
+            )
+        )
+        usenet = _source_to_umbrella(
+            SourceResult(
+                "newznab",
+                "Name",
+                "https://example.test/nzb",
+                metadata={"provider_type": "usenet", "usenet": "true"},
+            )
+        )
+
+        self.assertEqual(torrent["seeders"], 42)
+        self.assertTrue(torrent["true_size"])
+        self.assertNotIn("usenet", torrent)
+        self.assertEqual(usenet["source"], "usenet")
+        self.assertTrue(usenet["usenet"])
 
 
 if __name__ == "__main__":

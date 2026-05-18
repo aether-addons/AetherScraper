@@ -117,7 +117,7 @@ Suggested baseline commands may be recorded in checklist Phase 0 after audit.
 - `AETHERSCRAPER_FEATURE_PARITY_CHECKLIST.md`: live work tracker.
 - `AETHERSCRAPER_RECURRING_ISSUES.md`: cross-session memory for recurring bugs, gotchas, and decisions.
 - `script.module.aetherscraper/`: active implementation target.
-- `script.module.magneto/`: reference only. Do not copy unsafe behavior blindly.
+- `examples/script.module.magneto/`: reference only. Do not copy unsafe behavior blindly.
 
 ## Done definition
 

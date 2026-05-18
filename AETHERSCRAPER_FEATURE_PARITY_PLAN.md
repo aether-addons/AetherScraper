@@ -193,8 +193,8 @@ Covers missing features: player/UI integration.
 
 ## Phase 13.5 — Umbrella / FenLight / external-provider compatibility bridge
 
-1. Inspect Umbrella external-provider contract from local `plugin.video.umbrella` reference before implementation.
-2. Inspect FenLight external-scraper contract from local `plugin.video.fenlight` reference before implementation.
+1. Inspect Umbrella external-provider contract from local `examples/plugin.video.umbrella` reference before implementation.
+2. Inspect FenLight external-scraper contract from local `examples/plugin.video.fenlight` reference before implementation.
 3. Add compatibility module surface expected by Umbrella and FenLight: importable `aetherscraper.sources()` from `special://home/addons/script.module.aetherscraper/lib`.
 4. Match Magneto's `sources(specified_folders=None, ret_all=False)` signature. FenLight calls `sources(specified_folders=['torrents'])`; Umbrella calls `sources()` and `sources(ret_all=True)`.
 5. Return Magneto-style provider tuples, preferably one adapter class per enabled AetherScraper provider rather than one aggregate adapter, so provider names, priorities, enable flags, progress labels, and provider caches behave like Magneto in Umbrella/FenLight.

@@ -6,16 +6,16 @@ The scraper core stays in the module add-on so Kodi installs it as an Add-on lib
 
 ## Repository builds
 
-Develop this launcher in `../AetherScraper/plugin.program.aetherscraper/`. Kodi repository output is generated in sibling folder `../AetherScraperRepo/`.
+Develop this launcher in `../AetherScraper/plugin.program.aetherscraper/`. Kodi repository output is generated in sibling folder `../AetherRepo/`.
 
 After changes, bump this add-on's `addon.xml` version and rebuild:
 
 ```bash
-cd ../AetherScraperRepo
+cd ../AetherRepo
 python3 build_repo.py
 ```
 
-Install/update through `repository.aetherscraper`; Kodi installs `script.module.aetherscraper` as dependency.
+Install/update through the AetherRepo feed; Kodi installs `script.module.aetherscraper` as dependency.
 
 ## Routes
 

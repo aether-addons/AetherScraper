@@ -39,6 +39,30 @@ class Phase1SettingsStorageTests(unittest.TestCase):
         self.assertEqual(config.max_results, 12)
         self.assertTrue(config.debug_logging)
 
+    def test_magneto_style_settings_aliases(self) -> None:
+        settings = KodiSettings(
+            fallback={
+                "scraping_timeout": "44",
+                "provider.summary": "true",
+                "filter.foreign.single.audio": "true",
+                "results.language_filter": "true",
+                "results.language": "French",
+                "highlight.type": "single_color",
+                "scraper_single_highlight": "magenta",
+            },
+            addon=None,
+        )
+        snapshot = settings.snapshot()
+        config = GlobalConfig.from_kodi_settings(settings)
+
+        self.assertEqual(snapshot.scrape_timeout, 44)
+        self.assertTrue(settings.get_bool("provider.summary.enabled", False))
+        self.assertTrue(snapshot.filter_foreign_audio)
+        self.assertEqual(snapshot.languages, ["fr"])
+        self.assertEqual(config.to_search_options().languages, ["fr"])
+        self.assertEqual(settings.get_string("ui_highlight_type"), "single_color")
+        self.assertEqual(settings.get_string("ui_color_single"), "magenta")
+
     def test_profile_setup_and_version_update_are_non_destructive(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
             paths = first_run_setup(version="0.1.0", base_path=temp_dir)

@@ -8,23 +8,23 @@ Use this module only for sources you own, have permission to access, or that pub
 
 ## Repository builds
 
-Source development stays in `../AetherScraper/`. Kodi repository output is generated in sibling folder `../AetherScraperRepo/`.
+Source development stays in `../AetherScraper/`. Kodi repository output is generated in sibling folder `../AetherRepo/`.
 
 After changes, bump this add-on's `addon.xml` version and rebuild:
 
 ```bash
-cd ../AetherScraperRepo
+cd ../AetherRepo
 python3 build_repo.py
 ```
 
-Install/update through `repository.aetherscraper`; it packages this module and the `plugin.program.aetherscraper` launcher only.
+Install/update through the AetherRepo feed; it packages this module and the `plugin.program.aetherscraper` launcher only.
 
 ## Consumer add-on dependency
 
 ```xml
 <requires>
   <import addon="xbmc.python" version="3.0.1" />
-  <import addon="script.module.aetherscraper" version="0.1.0" />
+  <import addon="script.module.aetherscraper" version="0.1.2" />
 </requires>
 ```
 
@@ -319,7 +319,7 @@ resolve_to_kodi(handle, best, resolver=my_resolver)
 
 `kodi_stream_url()` only appends safe non-secret playback headers (`User-Agent`, `Referer`, `Origin`, `Accept`, and `Accept-Language`). Authorization, cookies, API keys, and auth tokens are never added to Kodi pipe headers by these helpers. Metadata lookup is intentionally a consumer-provided callable; this module does not call TMDb/IMDb or store lookup API keys.
 
-UI settings include colored source labels, quality/direct highlight colors, and autoplay policy (`score_quality_size`, `quality_score_size`, or `size_quality_score`). `pick_highlight_color()` provides a Kodi color-picker hook when Kodi UI is available.
+UI settings include colored source labels, result format (`list` or `wide`), highlight type (`resolution` or `single_color`), quality/direct highlight colors, priority language filtering, and autoplay policy (`score_quality_size`, `quality_score_size`, or `size_quality_score`). `pick_highlight_color()` provides a Kodi color-picker hook when Kodi UI is available. Magneto-style setting ids are accepted as aliases where practical: `scraping_timeout`, `provider.<id>`, `filter.foreign.single.audio`, `results.language_filter`, `results.language`, `results.list_format`, `highlight.type`, and `scraper_*_highlight` map to AetherScraper settings.
 
 ## Umbrella / external-provider bridge
 
@@ -335,7 +335,7 @@ fenlight_entries = aetherscraper.sources(specified_folders=["torrents"], ret_all
 
 `UmbrellaSourceAdapter` implements Magneto/Umbrella/FenLight-style `sources(data, hostDict)` and `sources_packs(data, hostDict, ...)` methods. `sources(specified_folders=None, ret_all=False)` returns one adapter tuple per AetherScraper provider, preserving provider id, priority, movie/episode flags, pack flag, and folder aliases such as `torrents`. Each generated adapter filters `ScraperManager` to that provider id.
 
-The bridge maps Umbrella and FenLight movie/episode/pack payloads to `ScraperManager` search adapters, including `tvshowtitle`, aliases, IMDb/TMDb ids, and optional `debrid_service` / `debrid_token` in `SearchOptions.extra`. It converts `SourceResult` objects to source dictionaries with `provider`, `source`, `name`, `name_info`, `quality`, `language`, `url`, `info`, `direct`, `debridonly`, `size` in GB, torrent `hash`, and pack metadata (`episode_start`, `episode_end`, `last_season`, `package`) where available.
+The bridge maps Umbrella and FenLight movie/episode/pack payloads to `ScraperManager` search adapters, including `tvshowtitle`, aliases, IMDb/TMDb ids, and optional `debrid_service` / `debrid_token` in `SearchOptions.extra`. It converts `SourceResult` objects to source dictionaries with `provider`, `source`, `name`, `name_info`, `quality`, `language`, `url`, `info`, `direct`, `debridonly`, `size` in GB, `true_size`, torrent `hash`, torrent `seeders`, `usenet` when applicable, and pack metadata (`episode_start`, `episode_end`, `last_season`, `package`) where available.
 
 Setup in Umbrella: Tools > Providers > Enable External Providers, choose `script.module.aetherscraper` where the host expects an importable external-provider module. Enable and configure AetherScraper providers in AetherScraper settings first; `sources(ret_all=True)` exposes providers for validation, while default `sources()` only returns enabled providers.
 
