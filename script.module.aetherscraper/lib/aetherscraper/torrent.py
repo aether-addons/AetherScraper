@@ -288,9 +288,9 @@ def normalize_torrent_items(items: list[dict[str, Any]]) -> list[TorrentItem]:
 
 
 def torrent_to_source(provider_id: str, item: TorrentItem) -> SourceResult:
-    url = item.magnet or item.torrent_url
     parsed = parse_magnet(item.magnet) if item.magnet else {}
     info_hash = item.info_hash or str(parsed.get("info_hash", ""))
+    url = item.magnet or (build_magnet(info_hash, item.title) if info_hash else "") or item.torrent_url
     metadata = dict(item.metadata)
     metadata.update(
         {

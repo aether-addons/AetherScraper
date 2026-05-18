@@ -69,7 +69,7 @@ Magneto's `tbtorznab` provider has provider id `tbtorznab`, enable setting `prov
 
 ### Fix / Decision
 
-Implement `TbTorznabProvider` with default endpoint `https://search-api.torbox.app/torznab/api`, alias support for `provider.tbtorznab` and `torbox.token`, shared Torznab parser, shared torrent normalization, and `limit` derived from `SearchOptions.max_results`.
+Implement `TbTorznabProvider` with default endpoint `https://search-api.torbox.app/torznab/api`, alias support for `provider.tbtorznab` and `torbox.token`, shared Torznab parser, shared torrent normalization, `limit` derived from `SearchOptions.max_results`, full `tt...` IMDb ids, no generic `q`/`year` params, and magnet URLs built from Torznab `infohash` values.
 
 ### Prevention
 

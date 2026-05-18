@@ -112,11 +112,36 @@ class TbTorznabProvider(TorznabProvider):
         retries=1,
         provider_type="torrent",
         base_url="https://search-api.torbox.app/torznab/api",
+        user_agent="Magneto for Kodi",
         pack_capable=True,
         has_movies=True,
         has_episodes=True,
         media_types=["movie", "episode", "season", "show"],
     )
+
+    def search(self, query, options):
+        if not self.base_url or not self.api_key or not query.imdb_id:
+            return []
+        params = self._torbox_params(query, options.max_results)
+        xml_text = self.http_client(options).get_text(self.base_url, params=params)
+        return [
+            torrent_to_source(self.id, item)
+            for item in parse_torznab(xml_text, self.base_url)
+        ]
+
+    def _torbox_params(self, query, limit: int) -> dict[str, str]:
+        params = {
+            "t": "movie" if query.media_type == "movie" else "tvsearch",
+            "limit": str(limit or 100),
+            "imdbid": str(query.imdb_id),
+            "apikey": self.api_key,
+        }
+        if query.media_type in {"episode", "season", "show"}:
+            if query.season is not None:
+                params["season"] = str(query.season)
+            if query.media_type == "episode" and query.episode is not None:
+                params["ep"] = str(query.episode)
+        return params
 
 
 class TorBoxTorznabProvider(TorznabProvider):

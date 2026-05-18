@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.module.aetherscraper" version="0.1.4" name="AetherScraper" provider-name="AetherScraper">
+<addon id="script.module.aetherscraper" version="0.1.5" name="AetherScraper" provider-name="AetherScraper">
   <requires>
     <import addon="xbmc.python" version="3.0.1" />
   </requires>
@@ -11,7 +11,7 @@
     <platform>all</platform>
     <license>MIT</license>
     <source>https://example.invalid/aetherscraper</source>
-    <news>Add disabled-by-default TorBox/TB Torznab provider with Magneto-compatible settings aliases.</news>
+    <news>Fix TorBox/TB Torznab request compatibility with Magneto and return magnet URLs from info hashes.</news>
     <assets>
       <icon>resources/icon.png</icon>
       <fanart>resources/fanart.png</fanart>

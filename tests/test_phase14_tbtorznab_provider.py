@@ -76,7 +76,13 @@ class Phase14TbTorznabProviderTests(unittest.TestCase):
         provider = TbTorznabProvider(settings=settings)
 
         results = provider.search(
-            SearchQuery("Big Buck Bunny", media_type="episode", season=1, episode=2),
+            SearchQuery(
+                "Big Buck Bunny",
+                media_type="episode",
+                season=1,
+                episode=2,
+                imdb_id="tt1254207",
+            ),
             SearchOptions(max_results=5),
         )
 
@@ -86,11 +92,13 @@ class Phase14TbTorznabProviderTests(unittest.TestCase):
         self.assertEqual(results[0].score, 31.0)
         self.assertEqual(TbTorznabHandler.last_path, "/torbox/api")
         self.assertEqual(TbTorznabHandler.last_query["t"], ["tvsearch"])
-        self.assertEqual(TbTorznabHandler.last_query["q"], ["Big Buck Bunny"])
+        self.assertNotIn("q", TbTorznabHandler.last_query)
+        self.assertEqual(TbTorznabHandler.last_query["imdbid"], ["tt1254207"])
         self.assertEqual(TbTorznabHandler.last_query["season"], ["1"])
         self.assertEqual(TbTorznabHandler.last_query["ep"], ["2"])
         self.assertEqual(TbTorznabHandler.last_query["apikey"], ["secret-key"])
         self.assertEqual(TbTorznabHandler.last_query["limit"], ["5"])
+        self.assertTrue(results[0].url.startswith("magnet:?xt=urn:btih:"))
         self.assertNotIn("secret-key", repr(results))
 
     def test_tbtorznab_discovery_and_metadata(self):
