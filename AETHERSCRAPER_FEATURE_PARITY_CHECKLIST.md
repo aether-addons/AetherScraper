@@ -340,8 +340,8 @@ Validation notes:
 - [x] Add tests with FenLight contract fixtures and import smoke test.
 - [x] README/help update with Umbrella setup steps.
 - [x] README/help update with FenLight setup steps.
-- [!] Manual Kodi/Umbrella validation: Tools > Providers > Enable External Providers / External Provider accepts AetherScraper.
-- [!] Manual Kodi/FenLight validation: External Scraper picker accepts AetherScraper and scrape runs.
+- [x] Manual Kodi/Umbrella validation: Tools > Providers > Enable External Providers / External Provider accepts AetherScraper.
+- [x] Manual Kodi/FenLight validation: External Scraper picker accepts AetherScraper and scrape runs.
 
 Validation notes:
 
@@ -357,7 +357,7 @@ Validation notes:
 - Passed 2026-05-17 root size/settings validation: LSP diagnostics for changed Python files; `PYTHONPATH=script.module.aetherscraper/lib python3 -m compileall -q script.module.aetherscraper/lib tests`; `PYTHONPATH=script.module.aetherscraper/lib python3 -m unittest discover -s tests` (90 tests); `python3 -m ruff check script.module.aetherscraper/lib tests script.module.aetherscraper/default.py script.module.aetherscraper/service.py`; XML parse check for `addon.xml` and `resources/settings.xml`; empty string settings checked for `<allowempty>true</allowempty>`.
 - Added 2026-05-18 external consumer fields: source dictionaries now include `true_size`, torrent `seeders` defaulting safely for Umbrella uncached seeder sort, and `usenet` when source/provider metadata indicates Usenet. Title-derived size remains `true_size=False`.
 - Passed 2026-05-18 external-field validation: LSP diagnostics for changed Python files; `PYTHONPATH=script.module.aetherscraper/lib python3 -m unittest discover -s tests -p 'test_phase13_5_umbrella_bridge.py' -v`; `PYTHONPATH=script.module.aetherscraper/lib:plugin.program.aetherscraper/resources/lib python3 -m compileall -q script.module.aetherscraper/lib plugin.program.aetherscraper/resources/lib plugin.program.aetherscraper/default.py tests`; `PYTHONPATH=script.module.aetherscraper/lib:plugin.program.aetherscraper/resources/lib python3 -m unittest discover -s tests` (98 tests); `python3 -m ruff check script.module.aetherscraper/lib plugin.program.aetherscraper/resources/lib plugin.program.aetherscraper/default.py tests`.
-- Manual Kodi/Umbrella and Kodi/FenLight validation pending in Kodi UI.
+- Manual Kodi/Umbrella and Kodi/FenLight validation completed by user 2026-05-18: Umbrella accepts AetherScraper external provider; FenLight external scraper picker accepts AetherScraper and scrape runs.
 - Added 2026-05-18 Magneto-style settings aliases: provider enable flags (`provider.<id>`), scrape timeout (`scraping_timeout`), foreign-audio filter (`filter.foreign.single.audio`), priority language (`results.language_filter` / `results.language`), result format (`results.list_format`), highlight type (`highlight.type`), and `scraper_*_highlight` colors. Priority language now maps into `SearchOptions.languages`; UI helpers honor wide labels and single-color highlight mode. Bumped `script.module.aetherscraper` to `0.1.3`.
 - Initial targeted unittest command failed because `tests.*` is not importable as a package: `PYTHONPATH=script.module.aetherscraper/lib:plugin.program.aetherscraper/resources/lib python3 -m unittest tests.test_phase1_settings_storage tests.test_phase13_kodi_ui_playback -v`. Corrected with unittest discover patterns.
 - Passed 2026-05-18 settings-alias validation: LSP diagnostics for changed Python/tests; `PYTHONPATH=script.module.aetherscraper/lib:plugin.program.aetherscraper/resources/lib python3 -m unittest discover -s tests -p 'test_phase1_settings_storage.py' -v`; `PYTHONPATH=script.module.aetherscraper/lib:plugin.program.aetherscraper/resources/lib python3 -m unittest discover -s tests -p 'test_phase13_kodi_ui_playback.py' -v`; `PYTHONPATH=script.module.aetherscraper/lib:plugin.program.aetherscraper/resources/lib python3 -m compileall -q script.module.aetherscraper/lib plugin.program.aetherscraper/resources/lib plugin.program.aetherscraper/default.py tests`; `PYTHONPATH=script.module.aetherscraper/lib:plugin.program.aetherscraper/resources/lib python3 -m unittest discover -s tests` (100 tests); `python3 -m ruff check script.module.aetherscraper/lib plugin.program.aetherscraper/resources/lib plugin.program.aetherscraper/default.py tests`; XML parse check for hosted add-on manifests/settings and JSON parse check for selector JSON.
@@ -385,9 +385,9 @@ Goal: keep `script.module.aetherscraper` module-only while adding a separate `pl
 - [x] Validate companion `addon.xml` family rules.
 - [x] Validate Python syntax and lint for companion files.
 - [x] Package module + companion with dependency/order notes.
-- [!] Smoke test in Kodi: companion visible under Program add-ons.
-- [!] Smoke test in Kodi: root/settings/providers/help routes open.
-- [!] Smoke test in Kodi: external selector route decision works or unsupported behavior is documented.
+- [x] Smoke test in Kodi: companion visible under Program add-ons.
+- [x] Smoke test in Kodi: root/settings/providers/help routes open.
+- [x] Smoke test in Kodi: external selector route decision works or unsupported behavior is documented.
 
 Validation notes:
 
@@ -396,7 +396,7 @@ Validation notes:
 - Module manifest remains `xbmc.python.module` only; no plugin/service extension points re-added.
 - Built zips: `dist/script.module.aetherscraper-0.1.0.zip`; `dist/plugin.program.aetherscraper-0.1.0.zip`. Install module first, then companion.
 - Passed 2026-05-18: LSP diagnostics for `plugin.program.aetherscraper/resources/lib/aetherscraper_program` and `tests/test_phase13_6_program_companion.py`; `PYTHONPATH=script.module.aetherscraper/lib:plugin.program.aetherscraper/resources/lib python3 -m compileall -q script.module.aetherscraper/lib plugin.program.aetherscraper/resources/lib plugin.program.aetherscraper/default.py tests`; `PYTHONPATH=script.module.aetherscraper/lib:plugin.program.aetherscraper/resources/lib python3 -m unittest discover -s tests` (97 tests); `python3 -m ruff check script.module.aetherscraper/lib plugin.program.aetherscraper/resources/lib plugin.program.aetherscraper/default.py tests`; XML parse for module/addon settings/companion addon; JSON parse for module+companion selector files.
-- Manual Kodi smoke tests remain blocked until run in Kodi UI.
+- Manual Kodi smoke completed by user 2026-05-18: companion Program add-on is visible; UI routes are OK for current scope; Umbrella external integration works through current route/setup. Future UI adjustments may still be needed, but Phase 13.6 smoke is accepted.
 
 ## Phase 14 — Real provider catalog expansion
 
@@ -416,7 +416,7 @@ For each provider: add settings, capability flags, timeout, parser, normalizatio
 - [ ] `piratebay`
 - [x] `prowlarr`
 - [ ] `rutor`
-- [ ] `tbtorznab`
+- [x] `tbtorznab`
 - [ ] `torlock`
 - [ ] `torrentdownload`
 - [x] `torrentio`
@@ -441,6 +441,10 @@ Validation notes:
 - Parser normalizes `streams[]` entries with `infoHash`, tracker sources, filename/title, size, seeders, file index, and binge group metadata into magnet-backed `SourceResult` objects.
 - Added Phase 14 Torrentio tests in `tests/test_phase14_torrentio_provider.py` plus README/HELP/settings/localization docs.
 - Safety review: uses public JSON stream endpoint only; no scraping, browser challenge, CAPTCHA, Cloudflare, or access-control bypass added.
+- Added `TbTorznabProvider` for Magneto-compatible TorBox/TB Torznab search. Provider is disabled by default, supports movie/episode/pack metadata, defaults to `https://search-api.torbox.app/torznab/api`, supports `provider.tbtorznab` and `torbox.token` aliases, and uses shared Torznab parsing + torrent normalization.
+- Added hidden TorBox API key setting, endpoint override for testing/compatible endpoints, localized help, README docs, and fixture HTTP tests in `tests/test_phase14_tbtorznab_provider.py`.
+- Safety review: uses TorBox Torznab API endpoint only; no scraping, browser challenge, CAPTCHA, Cloudflare, or access-control bypass added. Secrets are read from settings and not logged.
+- Passed 2026-05-18: LSP diagnostics for `script.module.aetherscraper/lib/aetherscraper` and `tests`; `PYTHONPATH=script.module.aetherscraper/lib:plugin.program.aetherscraper/resources/lib python3 -m compileall -q script.module.aetherscraper/lib plugin.program.aetherscraper/resources/lib plugin.program.aetherscraper/default.py tests`; `PYTHONPATH=script.module.aetherscraper/lib:plugin.program.aetherscraper/resources/lib python3 -m unittest discover -s tests` (102 tests); `python3 -m ruff check script.module.aetherscraper/lib plugin.program.aetherscraper/resources/lib plugin.program.aetherscraper/default.py tests`; XML parse for module/companion addon and module settings; JSON parse for repo JSON files.
 - Passed 2026-05-15: LSP diagnostics for `script.module.aetherscraper/lib/aetherscraper` and `tests`; `PYTHONPATH=script.module.aetherscraper/lib python3 -m compileall -q script.module.aetherscraper/lib tests script.module.aetherscraper/default.py script.module.aetherscraper/service.py`; `PYTHONPATH=script.module.aetherscraper/lib python3 -m unittest discover -s tests`; `python3 -m ruff check script.module.aetherscraper/lib tests script.module.aetherscraper/default.py script.module.aetherscraper/service.py`; XML parse check for `addon.xml` and `resources/settings.xml`.
 
 ## Phase 15 — Packaging, assets, docs, and release validation

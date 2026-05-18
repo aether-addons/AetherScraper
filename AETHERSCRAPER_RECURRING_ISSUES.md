@@ -54,6 +54,35 @@ How future agents should avoid it.
 
 ## Issues
 
+## 2026-05-18 — tbtorznab uses TorBox fixed endpoint and Magneto aliases
+
+Status: fixed
+Area: provider
+
+### Symptom
+
+Initial AetherScraper tbtorznab draft treated TorBox Torznab like a generic user-configured Torznab endpoint only.
+
+### Cause
+
+Magneto's `tbtorznab` provider has provider id `tbtorznab`, enable setting `provider.tbtorznab`, token setting `torbox.token`, fixed base `https://search-api.torbox.app`, endpoint `/torznab/api`, and sends `limit` plus IMDb/season/episode params.
+
+### Fix / Decision
+
+Implement `TbTorznabProvider` with default endpoint `https://search-api.torbox.app/torznab/api`, alias support for `provider.tbtorznab` and `torbox.token`, shared Torznab parser, shared torrent normalization, and `limit` derived from `SearchOptions.max_results`.
+
+### Prevention
+
+Before adding Phase 14 providers, inspect matching Magneto provider file and settings IDs; preserve safe compatible IDs/aliases without copying unsafe or broad exception behavior.
+
+### References
+
+- `examples/script.module.magneto/lib/magneto/providers/torrents/tbtorznab.py`
+- `script.module.aetherscraper/lib/aetherscraper/providers/torznab.py`
+- `script.module.aetherscraper/lib/aetherscraper/kodi/settings.py`
+- `tests/test_phase14_tbtorznab_provider.py`
+- `AETHERSCRAPER_FEATURE_PARITY_CHECKLIST.md` Phase 14
+
 ## 2026-05-18 — Magneto setting aliases must override fallback defaults
 
 Status: fixed

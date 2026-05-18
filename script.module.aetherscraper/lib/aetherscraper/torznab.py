@@ -24,8 +24,11 @@ def build_torznab_params(
     query,
     api_key: str = "",
     categories: list[int] | None = None,
+    limit: int | None = None,
 ) -> dict[str, str]:
     params = {"t": "search", "q": query.title}
+    if limit:
+        params["limit"] = str(limit)
     if query.media_type == "movie":
         params["t"] = "movie"
         if query.imdb_id:

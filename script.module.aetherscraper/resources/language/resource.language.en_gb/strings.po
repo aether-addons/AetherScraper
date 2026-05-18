@@ -331,6 +331,30 @@ msgctxt "#30143"
 msgid "Optional Torrentio config path segment, for example sort=qualitysize."
 msgstr "Optional Torrentio config path segment, for example sort=qualitysize."
 
+msgctxt "#30144"
+msgid "TorBox Torznab provider"
+msgstr "TorBox Torznab provider"
+
+msgctxt "#30145"
+msgid "Search a user-owned TorBox/TB Torznab endpoint; disabled by default."
+msgstr "Search a user-owned TorBox/TB Torznab endpoint; disabled by default."
+
+msgctxt "#30146"
+msgid "TorBox Torznab URL"
+msgstr "TorBox Torznab URL"
+
+msgctxt "#30147"
+msgid "TorBox/TB Torznab endpoint URL. Defaults to the TorBox search API."
+msgstr "TorBox/TB Torznab endpoint URL. Defaults to the TorBox search API."
+
+msgctxt "#30148"
+msgid "TorBox API key"
+msgstr "TorBox API key"
+
+msgctxt "#30149"
+msgid "API key for the TorBox Torznab endpoint. This value is not logged intentionally."
+msgstr "API key for the TorBox Torznab endpoint. This value is not logged intentionally."
+
 msgctxt "#30080"
 msgid "Support"
 msgstr "Support"

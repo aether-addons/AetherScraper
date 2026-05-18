@@ -327,6 +327,32 @@
             <heading>30136</heading>
           </control>
         </setting>
+        <setting id="provider.tbtorznab.enabled" type="boolean" label="30144" help="30145">
+          <level>1</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="provider.tbtorznab.base_url" type="string" label="30146" help="30147">
+          <level>1</level>
+          <default>https://search-api.torbox.app/torznab/api</default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string">
+            <heading>30146</heading>
+          </control>
+        </setting>
+        <setting id="provider.tbtorznab.api_key" type="string" label="30148" help="30149">
+          <level>1</level>
+          <default />
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string">
+            <heading>30148</heading>
+            <hidden>true</hidden>
+          </control>
+        </setting>
         <setting id="provider.torbox_torznab.enabled" type="boolean" label="30062" help="30063">
           <level>1</level>
           <default>false</default>

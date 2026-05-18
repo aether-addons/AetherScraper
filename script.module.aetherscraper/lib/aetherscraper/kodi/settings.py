@@ -47,6 +47,9 @@ _DEFAULTS: dict[str, str] = {
     "provider.prowlarr.enabled": "false",
     "provider.prowlarr.base_url": "",
     "provider.prowlarr.api_key": "",
+    "provider.tbtorznab.enabled": "false",
+    "provider.tbtorznab.base_url": "https://search-api.torbox.app/torznab/api",
+    "provider.tbtorznab.api_key": "",
     "provider.torbox_torznab.enabled": "false",
     "provider.torbox_torznab.base_url": "",
     "provider.torbox_torznab.api_key": "",
@@ -70,6 +73,8 @@ _SETTING_ALIASES: dict[str, tuple[str, ...]] = {
     "ui_color_1080p": ("scraper_1080p_highlight",),
     "ui_color_720p": ("scraper_720p_highlight",),
     "ui_color_sd": ("scraper_SD_highlight",),
+    "provider.tbtorznab.api_key": ("torbox.token",),
+    "provider.tbtorznab.enabled": ("provider.tbtorznab",),
 }
 _LANGUAGE_CODES = {
     "english": "en",

@@ -40,7 +40,9 @@ class TorznabProvider(BaseProvider):
     def search(self, query, options):
         if not self.base_url:
             return []
-        params = build_torznab_params(query, self.api_key, self.categories)
+        params = build_torznab_params(
+            query, self.api_key, self.categories, limit=options.max_results
+        )
         xml_text = self.http_client(options).get_text(self.base_url, params=params)
         return [
             torrent_to_source(self.id, item)
@@ -90,12 +92,42 @@ class ProwlarrProvider(TorznabProvider):
             self.base_url = f"{self.base_url.rstrip('/')}/{self.indexer_id}/api"
 
 
+class TbTorznabProvider(TorznabProvider):
+    """TorBox/TB Torznab provider for user-owned TorBox API access.
+
+    Required settings: TorBox Torznab endpoint URL and optional user API key.
+    Capabilities: movie, episode, season/show packs when TorBox endpoint supports them.
+    Timeout: provider timeout setting or per-call override.
+    Auth/API key: optional user-owned TorBox API key from Kodi settings.
+    Parser assumptions: Torznab-compatible RSS/XML from the configured endpoint.
+    Safe use: no challenge, CAPTCHA, Cloudflare, or access-control bypass.
+    """
+
+    config = ProviderConfig(
+        id="tbtorznab",
+        name="TorBox Torznab",
+        enabled=False,
+        priority=44,
+        timeout=10,
+        retries=1,
+        provider_type="torrent",
+        base_url="https://search-api.torbox.app/torznab/api",
+        pack_capable=True,
+        has_movies=True,
+        has_episodes=True,
+        media_types=["movie", "episode", "season", "show"],
+    )
+
+
 class TorBoxTorznabProvider(TorznabProvider):
-    """TorBox Torznab provider for user-owned TorBox API access."""
+    """Legacy internal TorBox Torznab provider id.
+
+    Prefer `TbTorznabProvider` for Magneto parity setting id `tbtorznab`.
+    """
 
     config = ProviderConfig(
         id="torbox_torznab",
-        name="TorBox Torznab",
+        name="TorBox Torznab (legacy)",
         enabled=False,
         priority=45,
         timeout=10,
