@@ -21,7 +21,7 @@ python3 scripts/validate_repo.py .
 `AetherRepo` defaults to the GitHub raw feed: `https://raw.githubusercontent.com/aether-addons/AetherRepo/main/`.
 Use `python3 build_repo.py --local-file-url` only for local Kodi testing.
 
-## Required workflow
+## Required AI workflow
 
 1. Read this file before working in this repository.
 2. Read the feature parity plan before implementing missing features.
@@ -32,6 +32,9 @@ Use `python3 build_repo.py --local-file-url` only for local Kodi testing.
 7. Add recurring bugs, gotchas, decisions, and non-obvious fixes to the recurring issues log.
 8. Keep implementation aligned with phase order unless there is a clear reason to skip ahead.
 9. If scope changes, update plan and checklist in the same change.
+10. Keep source-only changes in `AetherScraper`; do not commit generated Kodi repo zips here.
+11. After any hosted add-on change, rebuild and validate sibling `../AetherRepo` before release.
+12. Commit/push `AetherScraper` first, then commit/push regenerated `AetherRepo` output.
 
 ## Project goal
 
