@@ -7,19 +7,22 @@ Feature source: [`AETHERSCRAPER_MISSING_FEATURES.md`](AETHERSCRAPER_MISSING_FEAT
 
 ## Repository / install feed
 
-Development stays in this source tree (`AetherScraper`): https://github.com/aether-addons/AetherScraper.
-Kodi-installable repository output lives next to it in `../AetherRepo/`: https://github.com/aether-addons/AetherRepo.
+Development stays in this source repo (`AetherScraper`): https://github.com/aether-addons/AetherScraper.
+Kodi-installable repo feed is generated in `AetherRepo`: https://github.com/aether-addons/AetherRepo.
 
-After changing any hosted add-on, bump the changed add-on version in `addon.xml`, then rebuild the install repo:
+Automatic release flow:
 
-```bash
-cd ../AetherRepo
-python3 build_repo.py
-python3 scripts/validate_repo.py .
-```
+1. Change hosted add-on code here.
+2. Bump changed add-on `addon.xml` version.
+3. Push `AetherScraper`.
+4. `.github/workflows/publish-repo.yml` dispatches `AetherRepo` event `source-updated`.
+5. `AetherRepo` clones all repos in its `repo-sources.json`, rebuilds/validates feed, commits zips/checksums.
 
-`AetherRepo` defaults to the GitHub raw feed: `https://raw.githubusercontent.com/aether-addons/AetherRepo/main/`.
-Use `python3 build_repo.py --local-file-url` only for local Kodi testing.
+Do **not** commit generated Kodi repo zips here. Do **not** manually rebuild `../AetherRepo` unless user asks for local release/testing.
+
+If adding/removing hosted add-ons or moving add-ons between repos, update `AetherRepo/repo-sources.json`.
+
+`AetherRepo` default feed must stay: `https://raw.githubusercontent.com/aether-addons/AetherRepo/main/`.
 
 ## Required AI workflow
 
@@ -32,9 +35,9 @@ Use `python3 build_repo.py --local-file-url` only for local Kodi testing.
 7. Add recurring bugs, gotchas, decisions, and non-obvious fixes to the recurring issues log.
 8. Keep implementation aligned with phase order unless there is a clear reason to skip ahead.
 9. If scope changes, update plan and checklist in the same change.
-10. Keep source-only changes in `AetherScraper`; do not commit generated Kodi repo zips here.
-11. After any hosted add-on change, rebuild and validate sibling `../AetherRepo` before release.
-12. Commit/push `AetherScraper` first, then commit/push regenerated `AetherRepo` output.
+10. Keep source-only changes in `AetherScraper`; never commit generated Kodi repo zips here.
+11. After hosted add-on changes, rely on auto-publish workflow after push; manually rebuild `../AetherRepo` only when user asks or debugging release tooling.
+12. For new hosted repos/add-ons, update `AetherRepo/repo-sources.json` and ensure source repo has notify workflow.
 
 ## Project goal
 
